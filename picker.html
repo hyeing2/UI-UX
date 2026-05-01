@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 픽커</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>픽커(Picker)</h1>
+                <p class="lead-text">
+                    픽커(Picker)는 사용자가 텍스트를 직접 입력하기 까다로운 정보(날짜, 시간, 색상, 파일 등)를 쉽고 정확하게 선택할 수 있도록 돕는 UI 컴포넌트입니다. 단순히 선택지를 보여주는 '드롭다운'과 달리, 픽커는 데이터의 성격에 최적화된 인터페이스(달력, 시계 바늘, 컬러 휠 등)를 제공한다는 점이 큰 특징입니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>픽커 이미지 예시</h2>
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FcM1SQr%2FbtrVLwjowZd%2FAAAAAAAAAAAAAAAAAAAAAKQgzLxYrMOqU94YZJSWrBsNV1UGHiEmgiK9B1koGfS3%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DstStdhZrvFRQlqLh2XH2hKEtzO8%253D" alt="픽커 예시 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>픽커의 주요 종류</h2>
+                <p>웹 서비스에서 가장 자주 사용하는 픽커들은 다음과 같습니다.</p>
+                <ul>
+                    <li><strong>날짜 픽커 (Date Picker):</strong> 생년월일, 예약일 선택 - 달력을 띄워 사용자가 시각적으로 날짜를 찍게 함</li>
+                    <li><strong>시간 픽커 (Time Picker):</strong> 회의 시간, 운영 시간 설정 - 시계 모양 다이얼이나 숫자 스피너를 이용</li>
+                    <li><strong>색상 픽커 (Color Picker):</strong> 테마 설정, 프로필 색상 선택 - 색상환(Wheel)이나 팔레트를 제공</li>
+                    <li><strong>파일 픽커 (File Picker):</strong> 프로필 사진 업로드, 문서 첨부 - 기기의 파일 탐색기를 열어줌</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>픽커 디자인의 핵심 UX 원칙</h2>
+                <p>픽커를 설계할 때 가장 중요한 고민은 "네이티브(OS 기본)를 쓸 것인가, 커스텀을 할 것인가?"입니다.</p>
+                
+                <h3>① 네이티브가 최고인 이유 (Native is Best)</h3>
+                <p>모바일 환경에서는 브라우저가 제공하는 기본 픽커를 사용하는 것이 가장 좋습니다. 아이폰이나 안드로이드 등 OS 자체적으로 최적화된 인터페이스(휠 돌리기, 날짜 선택 등)를 제공하기 때문에, 사용자가 별도의 학습 없이도 아주 익숙하게 사용할 수 있습니다.</p>
+                
+                <h3>② 입력 값의 제약 (Constraints)</h3>
+                <p>픽커는 단순히 선택만 하는 게 아니라, '선택할 수 없는 범위'를 확실히 보여줘야 합니다. 예를 들어, 과거 날짜를 선택할 수 없는 예약 시스템이라면 과거 날짜는 회색으로 비활성화(Disabled) 시켜야 사용자의 실수를 원천 차단할 수 있습니다.</p>
+                
+                <h3>③ 접근성 (Accessibility)</h3>
+                <p>픽커는 키보드나 스크린 리더로 제어하기가 생각보다 까다롭습니다. 따라서 커스텀 픽커를 만들 때는 접근성 표준(WAI-ARIA 등)을 잘 준수해야 합니다.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 구현 방법 (HTML5 Native)</h2>
+                <p>초보자 단계에서는 복잡한 jQuery 라이브러리를 쓰기보다, HTML5의 표준 input 태그를 활용하는 것을 강력하게 추천합니다. 가장 빠르고, 가장 모바일 친화적이기 때문입니다.</p>
+                
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;label&gt;예약 날짜:&lt;/label&gt;
+&lt;input type="date" name="reservation-date"&gt;
+
+&lt;label&gt;테마 색상:&lt;/label&gt;
+&lt;input type="color" name="theme-color"&gt;
+
+&lt;label&gt;시작 시간:&lt;/label&gt;
+&lt;input type="time" name="start-time"&gt;</code></pre>
+
+                <blockquote style="background: #ecf1ff; padding: 15px; border-left: 4px solid #2b5cff; margin: 15px 0;">
+                    <strong>교수님의 팁:</strong> 위 코드만으로도 브라우저는 기기에 맞는 가장 완벽한 UI를 자동으로 띄워줍니다! 데스크탑에서는 작은 달력이, 모바일에서는 터치하기 좋은 큰 달력이 나타나죠. 굳이 어려운 라이브러리를 쓰지 않아도 되는 이유입니다.
+                </blockquote>
+            </section>
+
+            <section class="content-section">
+                <h2>실제 데모</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">예약 날짜:</label>
+                        <input type="date" name="reservation-date" style="width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 5px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">시작 시간:</label>
+                        <input type="time" name="start-time" style="width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 5px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">테마 색상:</label>
+                        <input type="color" name="theme-color" style="width: 100%; height: 50px; border: 1px solid var(--line); border-radius: 5px; cursor: pointer;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">파일 업로드:</label>
+                        <input type="file" name="file-picker" style="width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 5px;">
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>커스텀 픽커가 필요한 경우</h2>
+                <p>네이티브 픽커로는 표현할 수 없는 특수 기능이 필요할 때만 커스텀 디자인을 고민하세요.</p>
+                <ul>
+                    <li><strong>범위 선택:</strong> "2026-05-01부터 2026-05-10까지"처럼 기간을 선택해야 할 때.</li>
+                    <li><strong>복잡한 제약:</strong> 특정 요일만 선택 가능하게 하거나, 시간대를 15분 단위로 제한해야 할 때.</li>
+                    <li><strong>브랜딩:</strong> 사이트의 디자인 톤앤매너를 위해 달력의 스타일을 완전히 바꾸고 싶을 때.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>교수님의 실전 가이드</h2>
+                <blockquote>
+                    <p>"픽커는 <strong>'사용자의 번거로움을 줄여주는 도구'</strong>입니다. 달력을 눌러서 날짜를 고르는 것보다, 생년월일이나 기간을 선택할 때 사용자가 몇 번이나 클릭해야 하는지 세어보세요. 클릭 횟수가 3번을 넘어간다면, 그건 픽커가 아니라 <strong>'귀찮음'</strong>을 유발하는 UI가 될 수 있습니다."</p>
+                </blockquote>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

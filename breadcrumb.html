@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 브레드크럼</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>브레드크럼(Breadcrumb)</h1>
+                <p class="lead-text">
+                    브레드크럼(Breadcrumb)은 웹사이트의 복잡한 계층 구조 속에서 사용자가 "현재 어디에 있는지"를 알려주고, "상위 페이지로 쉽게 돌아가게 해주는" 보조 내비게이션 UI입니다. 마치 동화 헨젤과 그레텔에서 길을 잃지 않으려 뿌려두었던 빵 부스러기(Breadcrumb)에서 이름이 유래했습니다. 웹 개발자와 디자이너에게 브레드크럼은 정보 구조(IA)의 핵심을 보여주는 아주 중요한 장치입니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>브레드크럼 이미지 예시</h2>
+                <img src="https://velog.velcdn.com/images/yona_inthe_fish/post/46b68ffb-d19f-42f4-878c-cd0f8db3ef6e/image.png" alt="브레드크럼 예시 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>브레드크럼의 핵심 UX 목적</h2>
+                
+                <h3>① 사용자 위치 파악 (Orientation)</h3>
+                <p>사용자가 검색 엔진이나 외부 링크를 통해 페이지 깊숙한 곳으로 바로 들어왔을 때, 자신이 사이트의 어느 카테고리에 속해 있는지 직관적으로 알려줍니다.</p>
+                
+                <h3>② 쉬운 역방향 이동 (Navigation)</h3>
+                <p>상위 카테고리로 돌아가기 위해 뒤로 가기 버튼을 여러 번 누를 필요가 없습니다. 클릭 한 번으로 상위 폴더나 메인 홈으로 즉시 이동할 수 있습니다.</p>
+                
+                <h3>③ SEO(검색 엔진 최적화) 유리함</h3>
+                <p>구글과 같은 검색 엔진은 브레드크럼을 통해 사이트의 구조를 파악합니다. 잘 설계된 브레드크럼은 검색 결과에도 반영되어 사용자가 사이트 내용을 미리 파악하는 데 도움을 줍니다.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>브레드크럼 설계 시 UX 가이드라인</h2>
+                <ul>
+                    <li><strong>구분자(Separator) 사용:</strong> 항목과 항목 사이를 &gt; , / , ❯ 와 같은 기호로 구분하여 시각적 흐름을 만듭니다.</li>
+                    <li><strong>현재 페이지는 비활성화:</strong> 브레드크럼의 마지막 항목(현재 페이지)은 클릭할 필요가 없으므로 링크를 걸지 않고 텍스트로만 표시합니다.</li>
+                    <li><strong>홈(Home) 포함:</strong> 항상 가장 상위인 '홈' 버튼을 포함하여 언제든 메인으로 돌아갈 수 있게 합니다.</li>
+                    <li><strong>생략 처리:</strong> 경로가 너무 길어질 경우(예: 홈 &gt; 패션 &gt; 여성 &gt; 상의 &gt; 니트 &gt; 가디건 &gt; 봄가디건), 중간 단계를 ...로 생략하는 기법을 사용합니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 코드 예시 (HTML/CSS)</h2>
+                <p>접근성을 고려하여 시맨틱 태그인 &lt;nav&gt;와 &lt;ol&gt;을 사용하는 것이 표준입니다.</p>
+                
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;nav aria-label="Breadcrumb"&gt;
+  &lt;ol class="breadcrumb"&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;홈&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;개발&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;프론트엔드&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item active" aria-current="page"&gt;브레드크럼&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+
+                <h3>CSS</h3>
+                <pre class="code-block"><code>.breadcrumb {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+}
+
+/* 항목 사이 구분자 만들기 */
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">"; /* 구분자 기호 */
+  padding: 0 8px;
+  color: #999;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d; /* 현재 페이지는 클릭 불가 느낌 */
+}</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실제 데모</h2>
+                <nav aria-label="Breadcrumb" style="margin-bottom: 30px;">
+                    <ol class="breadcrumb" style="display: flex; list-style: none; padding: 0; font-size: 14px;">
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">홈</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">&gt;</span></li>
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">개발</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">&gt;</span></li>
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">프론트엔드</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">&gt;</span></li>
+                        <li style="margin-right: 0; color: #6c757d;">브레드크럼</li>
+                    </ol>
+                </nav>
+
+                <h3>다양한 브레드크럼 스타일</h3>
+                <p><strong>슬래시(/) 구분자:</strong></p>
+                <nav aria-label="Breadcrumb 2" style="margin-bottom: 20px;">
+                    <ol class="breadcrumb" style="display: flex; list-style: none; padding: 0; font-size: 14px;">
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">쇼핑</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">/ </span></li>
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">전자제품</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">/ </span></li>
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">컴퓨터</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">/ </span></li>
+                        <li style="margin-right: 0; color: #6c757d;">노트북</li>
+                    </ol>
+                </nav>
+
+                <p><strong>화살표(❯) 구분자:</strong></p>
+                <nav aria-label="Breadcrumb 3">
+                    <ol class="breadcrumb" style="display: flex; list-style: none; padding: 0; font-size: 14px;">
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">커뮤니티</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">❯</span></li>
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">질문 & 답변</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">❯</span></li>
+                        <li style="margin-right: 0;"><a href="#" style="text-decoration: none; color: #007bff;">HTML/CSS</a></li>
+                        <li style="margin-right: 0;"><span style="padding: 0 8px; color: #999;">❯</span></li>
+                        <li style="margin-right: 0; color: #6c757d;">브레드크럼 만드는 법</li>
+                    </ol>
+                </nav>
+            </section>
+
+            <section class="content-section">
+                <h2>언제 브레드크럼을 사용해야 할까?</h2>
+                <p>모든 사이트에 브레드크럼이 필요한 것은 아닙니다. 아래 기준을 고려해 보세요.</p>
+                <ul>
+                    <li><strong>사이트 구조:</strong> 깊이가 2단계 이상인 복잡한 구조라면 필수입니다.</li>
+                    <li><strong>사이트 성격:</strong> 쇼핑몰, 블로그, 문서화 사이트처럼 카테고리가 많은 경우 아주 유용합니다.</li>
+                    <li><strong>단순한 사이트:</strong> 랜딩 페이지나 단일 페이지 사이트(Single Page)에는 불필요합니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>교수님의 실전 팁</h2>
+                <blockquote>
+                    <p>"브레드크럼은 사용자를 안심시키는 장치입니다. 특히 모바일에서는 공간이 좁아 브레드크럼을 다 보여주기 어려울 수 있어요. 이럴 땐 '이전 상위 카테고리로 돌아가기' 버튼 하나만 띄워주는 것이 오히려 더 세련된 모바일 UX가 될 수 있습니다."</p>
+                </blockquote>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

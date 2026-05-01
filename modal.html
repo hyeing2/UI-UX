@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 모달</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>모달창 학습</h1>
+                <p class="lead-text">모달 열기/닫기, 배경 클릭 닫기 동작을 jQuery로 구현한 예시입니다.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://i.pinimg.com/originals/9a/ca/f9/9acaf9382d2c00bb5137e3cefbaaea4b.png"
+                    alt="모달 UI 참고 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>프롬프트</h2>
+                <div class="content-card">
+                    "배경 클릭 또는 닫기 버튼으로 닫히는 접근성 좋은 모달을 만들어줘."
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>코드</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;button id="openModal"&gt;모달 열기&lt;/button&gt;
+
+&lt;div id="modalContainer" class="hidden"&gt;
+  &lt;div id="modalContent"&gt;
+    &lt;h2&gt;안내 메시지&lt;/h2&gt;
+    &lt;p&gt;이것은 모달창입니다. 배경을 클릭하거나 버튼을 눌러 닫으세요.&lt;/p&gt;
+    &lt;button id="closeModal"&gt;닫기&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS (중요한 스타일)</h3>
+                <pre class="code-block"><code>/* 배경을 어둡게 만들어 뒤쪽 클릭을 막습니다 */
+#modalContainer {
+  position: fixed; /* 화면에 고정 */
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 처음에는 보이지 않게 설정 */
+.hidden {
+  display: none !important;
+}
+
+/* 실제 모달 박스 */
+#modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}</code></pre>
+
+                <h3>jQuery (동작 제어)</h3>
+                <pre class="code-block"><code>$(document).ready(function() {
+  // 1. 열기 버튼 클릭 시 'hidden' 클래스 제거
+  $('#openModal').on('click', function() {
+    $('#modalContainer').removeClass('hidden');
+  });
+
+  // 2. 닫기 버튼 클릭 시 다시 'hidden' 클래스 추가
+  $('#closeModal').on('click', function() {
+    $('#modalContainer').addClass('hidden');
+  });
+
+  // 3. 모달 배경(검은 부분)을 클릭해도 닫히게 설정
+  $('#modalContainer').on('click', function(e) {
+    if (e.target === this) {
+      $(this).addClass('hidden');
+    }
+  });
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <button id="openModal" class="primary-btn" type="button">모달 열기</button>
+            </section>
+        </main>
+    </div>
+
+    <div id="modalContainer" class="hidden" aria-hidden="true">
+        <div id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+            <h2 id="modalTitle">안내 메시지</h2>
+            <p>이것은 모달창입니다. 배경을 클릭하거나 버튼을 눌러 닫으세요.</p>
+            <button id="closeModal" class="secondary-btn" type="button">닫기</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

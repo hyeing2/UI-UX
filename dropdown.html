@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 드롭다운 리스트</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>드롭다운 리스트(Drop-down List) 학습</h1>
+                <p class="lead-text">
+                    드롭다운 리스트는 공간을 효율적으로 사용하면서 사용자에게 여러 선택지 중 하나를 고르게 하는
+                    고전적이면서도 필수적인 UI 컴포넌트입니다.
+                    평소에는 하나의 값만 보여주다가, 클릭하면 리스트가 아래로 펼쳐집니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://codeit-assets.s3.ap-northeast-2.amazonaws.com/tutorials/temp/%25E1%2584%2583%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25A9%25E1%2586%25B8%25E1%2584%2583%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25AE%25E1%2586%25AB.png"
+                    alt="드롭다운 리스트 UI 예시 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>설명</h2>
+                <h3>1. 드롭다운의 UX/UI 목적: 공간 절약</h3>
+                <ul class="plain-list">
+                    <li>정돈된 UI: 선택지가 많아도 한 줄만 차지해 화면이 깔끔해집니다.</li>
+                    <li>의사결정 보조: 직접 입력 대신 정해진 옵션 선택으로 입력 오류를 줄일 수 있습니다. (예: 국가, 생년월일)</li>
+                </ul>
+
+                <h3>2. 설계 시 주의할 UX 원칙</h3>
+                <ul class="plain-list">
+                    <li><strong>옵션 개수</strong>: 2~3개면 라디오 버튼이 더 낫고, 20개 이상이면 검색/정렬 기능이 필요합니다.</li>
+                    <li><strong>명확한 레이블/플레이스홀더</strong>: "지역을 선택하세요", "정렬 기준"처럼 의미가 드러나야 합니다.</li>
+                    <li><strong>상태 시각화</strong>: 화살표(Chevron), 호버/포커스 상태로 펼침/선택 상태를 명확히 보여줘야 합니다.</li>
+                </ul>
+
+                <h3>4. 모바일 UX</h3>
+                <ul class="plain-list">
+                    <li>기본 UI 활용: 모바일은 OS Picker를 쓰는 표준 `select`가 더 편한 경우가 많습니다.</li>
+                    <li>바텀 시트 활용: 최근에는 드롭다운 대신 바텀 시트 패턴도 자주 사용합니다.</li>
+                </ul>
+
+                <h3>교수님의 실전 팁</h3>
+                <div class="content-card">
+                    "드롭다운은 사용자가 생각을 덜 하게 만들어야 합니다.
+                    옵션이 너무 많다면 드롭다운 고집보다 모달 + 검색 방식이 더 나은 UX일 수 있습니다.
+                    공간 절약보다 사용자의 편리함을 우선하세요."
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>코드</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;div class="dropdown"&gt;
+  &lt;button class="dropdown-toggle"&gt;지역 선택 &lt;span class="arrow"&gt;▼&lt;/span&gt;&lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;서울&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;부산&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;인천&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;대구&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS (Figma 가이드 반영 스타일)</h3>
+                <pre class="code-block"><code>.dropdown {
+  position: relative;
+  width: 200px;
+}
+
+.dropdown-toggle {
+  width: 100%;
+  padding: 12px 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%; left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.dropdown.active .dropdown-menu {
+  display: block;
+}</code></pre>
+
+                <h3>jQuery (상태 제어)</h3>
+                <pre class="code-block"><code>$(document).ready(function() {
+  $('.dropdown-toggle').on('click', function() {
+    $(this).parent('.dropdown').toggleClass('active');
+  });
+
+  $('.dropdown-menu li a').on('click', function(e) {
+    e.preventDefault();
+    let selectedText = $(this).text();
+    $('.dropdown-toggle').html(selectedText + ' &lt;span class="arrow"&gt;▼&lt;/span&gt;');
+    $('.dropdown').removeClass('active');
+  });
+
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('.dropdown').length) {
+      $('.dropdown').removeClass('active');
+    }
+  });
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <div class="dropdown dropdown-demo">
+                    <button class="dropdown-toggle" type="button">지역 선택 <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">서울</a></li>
+                        <li><a href="#">부산</a></li>
+                        <li><a href="#">인천</a></li>
+                        <li><a href="#">대구</a></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

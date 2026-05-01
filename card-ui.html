@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 카드 UI</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>카드 UI(Card UI) 학습</h1>
+                <p class="lead-text">
+                    카드 UI는 정보를 독립적인 상자 단위로 묶어 보여주는 방식으로,
+                    콘텐츠가 많은 서비스(핀터레스트, 인스타그램, 쇼핑몰 등)에서 널리 사용됩니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://codeit-assets.s3.ap-northeast-2.amazonaws.com/tutorials/temp/%25E1%2584%258F%25E1%2585%25A1%25E1%2584%2583%25E1%2585%25B3.png"
+                    alt="카드 UI 예시 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>설명</h2>
+                <h3>1. 핵심 개념: 정보의 원자화</h3>
+                <ul class="plain-list">
+                    <li><strong>독립성</strong>: 카드 하나가 하나의 아이템 의미를 가집니다.</li>
+                    <li><strong>유연성</strong>: 데스크탑 다열/모바일 단일열 등 반응형 전환이 쉽습니다.</li>
+                    <li><strong>시각적 균형</strong>: 그리드 위에 정돈되어 페이지 전체 안정감을 높입니다.</li>
+                </ul>
+
+                <h3>2. 카드 UI의 5가지 구성 요소</h3>
+                <div class="alert-compare">
+                    <div class="alert-compare-item"><strong>이미지(Media)</strong> 시선을 먼저 끄는 대표 시각 요소</div>
+                    <div class="alert-compare-item"><strong>타이틀(Title)</strong> 카드의 정체성을 전달하는 핵심 텍스트</div>
+                    <div class="alert-compare-item"><strong>본문(Body)</strong> 2~3줄 내외의 짧은 요약 정보</div>
+                    <div class="alert-compare-item"><strong>메타데이터(Meta)</strong> 날짜/조회수/작성자 등 보조 정보</div>
+                    <div class="alert-compare-item"><strong>작업 영역(CTA)</strong> 상세 보기/좋아요 등 다음 행동 유도</div>
+                </div>
+
+                <h3>3. UX를 높이는 디자인 디테일</h3>
+                <ul class="plain-list">
+                    <li>시각적 계층: 이미지 → 제목 → 본문 → 버튼 순으로 시선 흐름을 설계합니다.</li>
+                    <li>여백 설계: 카드 내부/카드 간 간격을 충분히 두어 가독성을 확보합니다.</li>
+                    <li>Shadow & Radius: 둥근 모서리와 그림자로 입체감과 클릭 가능성을 전달합니다.</li>
+                </ul>
+
+                <h3>5. 카드 UI vs 리스트 UI</h3>
+                <div class="alert-compare">
+                    <div class="alert-compare-item"><strong>카드 UI</strong> 이미지 중심, 몰입감 높음, 정보 밀도 낮음, 포트폴리오/쇼핑몰에 적합</div>
+                    <div class="alert-compare-item"><strong>리스트 UI</strong> 텍스트 중심, 빠른 스캔에 유리, 정보 밀도 높음, 메일/게시판에 적합</div>
+                </div>
+
+                <h3>교수님의 팁</h3>
+                <div class="content-card">
+                    "카드는 웹사이트의 얼굴입니다. 이미지 품질이 사이트 신뢰도에 직접 영향을 줄 수 있습니다.
+                    CSS의 `object-fit: cover;`를 활용해 카드 비율에 맞춰 이미지가 잘리도록 설정하세요."
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>코드</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;div class="card-grid"&gt;
+  &lt;article class="card"&gt;
+    &lt;div class="card-thumb"&gt;
+      &lt;img src="https://via.placeholder.com/400x250" alt="프로젝트 이미지"&gt;
+    &lt;/div&gt;
+    &lt;div class="card-content"&gt;
+      &lt;span class="category"&gt;Web Design&lt;/span&gt;
+      &lt;h2 class="title"&gt;B2B 랜딩 페이지 프로젝트&lt;/h2&gt;
+      &lt;p class="description"&gt;사용자 경험을 극대화한 반응형 랜딩 페이지 제작 사례입니다.&lt;/p&gt;
+      &lt;div class="card-footer"&gt;
+        &lt;span class="date"&gt;2026.04.29&lt;/span&gt;
+        &lt;button class="btn-more"&gt;자세히 보기&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS (핵심 스타일)</h3>
+                <pre class="code-block"><code>.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.card-content { padding: 20px; }
+.description { font-size: 0.9rem; color: #666; line-height: 1.5; }</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <div class="card-grid">
+                    <article class="card">
+                        <div class="card-thumb">
+                            <img src="https://codeit-assets.s3.ap-northeast-2.amazonaws.com/tutorials/temp/%25E1%2584%258F%25E1%2585%25A1%25E1%2584%2583%25E1%2585%25B3.png" alt="카드 프로젝트 이미지">
+                        </div>
+                        <div class="card-content">
+                            <span class="category">Web Design</span>
+                            <h2 class="title">B2B 랜딩 페이지 프로젝트</h2>
+                            <p class="description">사용자 경험을 극대화한 반응형 랜딩 페이지 제작 사례입니다.</p>
+                            <div class="card-footer">
+                                <span class="date">2026.04.29</span>
+                                <button class="btn-more" type="button">자세히 보기</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-thumb">
+                            <img src="https://codeit-assets.s3.ap-northeast-2.amazonaws.com/tutorials/temp/%25E1%2584%258F%25E1%2585%25A1%25E1%2584%2583%25E1%2585%25B3.png" alt="카드 프로젝트 이미지">
+                        </div>
+                        <div class="card-content">
+                            <span class="category">Frontend</span>
+                            <h2 class="title">컴포넌트 디자인 시스템</h2>
+                            <p class="description">카드, 버튼, 모달 컴포넌트를 통일된 가이드로 정리한 프로젝트입니다.</p>
+                            <div class="card-footer">
+                                <span class="date">2026.04.30</span>
+                                <button class="btn-more" type="button">자세히 보기</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

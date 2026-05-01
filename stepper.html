@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 스텝퍼</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>스텝퍼(Stepper)</h1>
+                <p class="lead-text">
+                    회원가입, 결제, 설정 변경과 같이 여러 단계로 구성된 복잡한 작업을 작은 단위로 나누어 보여주는 UI입니다.
+                    사용자가 전체 과정 중 어디에 있고, 앞으로 얼마나 남았는지 시각적으로 알려줌으로써 "이걸 언제 다 하지?"라는 막막함을 줄여주는 아주 친절한 도구입니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>스텝퍼 이미지 예시</h2>
+                <img src="https://storage.googleapis.com/websiteasset/uploads/65adab90-artwork-design-2.png" alt="스텝퍼 예시 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>스텝퍼의 핵심 UX 원칙</h2>
+                <ul>
+                    <li><strong>진행 상황 시각화:</strong> "현재 3단계 중 1단계를 하고 있구나"라는 것을 확실히 인지시켜 줍니다.</li>
+                    <li><strong>불안감 해소:</strong> 끝이 보이는 작업은 사용자가 중간에 이탈하지 않고 끝까지 완주하게 만드는 힘이 있습니다.</li>
+                    <li><strong>구간별 검증:</strong> 1단계를 마치고 2단계로 넘어갈 때 유효성 검사(Validation)를 할 수 있어, 오류를 초기에 잡아낼 수 있습니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>스텝퍼의 두 가지 형태</h2>
+                <p><strong>가로형 (Horizontal Stepper):</strong> 가장 많이 쓰이는 방식입니다. 상단에 진행 상황을 나열하고 아래에 폼을 배치합니다. 데스크탑 환경에서 매우 깔끔해 보입니다.</p>
+                <p><strong>세로형 (Vertical Stepper):</strong> 모바일에서 공간이 좁을 때 유리합니다. 단계가 내려갈수록 아래로 확장되는 방식입니다. (예: 배송 추적 화면)</p>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 코드 예시</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;div class="stepper"&gt;
+  &lt;div class="step active" data-step="1"&gt;1. 정보입력&lt;/div&gt;
+  &lt;div class="step" data-step="2"&gt;2. 결제방법&lt;/div&gt;
+  &lt;div class="step" data-step="3"&gt;3. 완료&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="step-content active" id="content-1"&gt;정보를 입력하세요&lt;/div&gt;
+&lt;div class="step-content" id="content-2"&gt;결제 정보를 선택하세요&lt;/div&gt;
+&lt;div class="step-content" id="content-3"&gt;결제가 완료되었습니다!&lt;/div&gt;
+
+&lt;button id="nextBtn"&gt;다음 단계로&lt;/button&gt;</code></pre>
+
+                <h3>CSS</h3>
+                <pre class="code-block"><code>.stepper { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.step { padding: 10px; border-bottom: 3px solid #ccc; color: #ccc; }
+.step.active { border-bottom: 3px solid #007bff; color: #007bff; font-weight: bold; }
+
+.step-content { display: none; padding: 20px; border: 1px solid #ddd; }
+.step-content.active { display: block; }</code></pre>
+
+                <h3>jQuery (상태 제어)</h3>
+                <pre class="code-block"><code>$(document).ready(function() {
+  let currentStep = 1;
+
+  $('#nextBtn').on('click', function() {
+    if (currentStep &lt; 3) {
+      currentStep++;
+      
+      // 스텝바 업데이트
+      $('.step').removeClass('active');
+      $(`.step[data-step="${currentStep}"]`).addClass('active');
+      
+      // 콘텐츠 업데이트
+      $('.step-content').removeClass('active');
+      $(`#content-${currentStep}`).addClass('active');
+    }
+  });
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실제 데모</h2>
+                <div class="stepper">
+                    <div class="step active" data-step="1">1. 정보입력</div>
+                    <div class="step" data-step="2">2. 결제방법</div>
+                    <div class="step" data-step="3">3. 완료</div>
+                </div>
+
+                <div class="step-content active" id="content-1">
+                    <h3>정보 입력</h3>
+                    <p>이름과 이메일을 입력하세요.</p>
+                    <input type="text" placeholder="이름" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid var(--line); border-radius: 5px;">
+                    <input type="email" placeholder="이메일" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid var(--line); border-radius: 5px;">
+                </div>
+                <div class="step-content" id="content-2">
+                    <h3>결제 방법 선택</h3>
+                    <p>결제 방법을 선택하세요.</p>
+                    <select style="width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 5px;">
+                        <option>신용카드</option>
+                        <option>계좌이체</option>
+                        <option>페이팔</option>
+                    </select>
+                </div>
+                <div class="step-content" id="content-3">
+                    <h3>완료</h3>
+                    <p>결제가 완료되었습니다! 감사합니다.</p>
+                </div>
+
+                <div class="stepper-controls">
+                    <button id="prevBtn" class="secondary-btn">이전</button>
+                    <button id="nextBtn" class="primary-btn">다음</button>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>스텝퍼 디자인 실무 팁</h2>
+                <ul>
+                    <li><strong>이전 단계로 가기:</strong> 사용자가 실수했을 때를 대비해 '이전(Back)' 버튼을 항상 제공해야 합니다.</li>
+                    <li><strong>상태 표시:</strong> '진행 중', '완료됨', '비활성화됨'의 색상을 명확히 구분하세요. (보통 완료된 단계는 체크 표시나 진한 색으로 표현합니다.)</li>
+                    <li><strong>반응형 고려:</strong> 단계가 너무 많으면(5단계 이상) 화면에 다 들어가지 않습니다. 이럴 땐 모바일에서 "1/5 단계"처럼 텍스트로 축약해서 보여주는 것이 좋습니다.</li>
+                </ul>
+                <blockquote>
+                    <p>"스텝퍼는 단순히 디자인 요소가 아니라 사용자의 여정을 관리하는 나침반입니다. 사용자가 '내가 길을 잃지 않았다'고 느끼게 하는 것, 그것이 스텝퍼의 존재 이유입니다. 만약 과정이 너무 길다면(7단계 이상), 스텝퍼를 쪼개서 한 번에 보여주지 말고 페이지를 나누는 것을 추천합니다."</p>
+                </blockquote>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+    <script>
+        $(document).ready(function() {
+            let currentStep = 1;
+            const totalSteps = 3;
+
+            function updateStepper() {
+                $('.step').removeClass('active completed');
+                for (let i = 1; i <= currentStep; i++) {
+                    if (i === currentStep) {
+                        $(`.step[data-step="${i}"]`).addClass('active');
+                    } else if (i < currentStep) {
+                        $(`.step[data-step="${i}"]`).addClass('completed');
+                    }
+                }
+
+                $('.step-content').removeClass('active');
+                $(`#content-${currentStep}`).addClass('active');
+
+                $('#prevBtn').prop('disabled', currentStep === 1);
+                $('#nextBtn').text(currentStep === totalSteps ? '완료' : '다음');
+            }
+
+            $('#nextBtn').on('click', function() {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateStepper();
+                } else {
+                    alert('모든 단계가 완료되었습니다!');
+                }
+            });
+
+            $('#prevBtn').on('click', function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateStepper();
+                }
+            });
+
+            updateStepper(); // 초기 상태 설정
+        });
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">c:\Users\ezen\Desktop\UIUX용어\stepper.html

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 코치마크</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>코치마크(Coach Mark)</h1>
+                <p class="lead-text">
+                    코치마크(Coach Mark)는 처음 웹사이트나 앱에 접속한 사용자에게 "이 버튼은 이런 기능을 해요"라고 알려주는 디지털 가이드입니다. 마치 운전면허 연습 때 옆에 앉아 계신 강사님처럼, 사용자가 길을 잃지 않게 도와주는 친절한 온보딩(Onboarding) 도구죠. 프론트엔드 개발자이자 UX/UI 디자이너의 관점에서 코치마크의 핵심을 정리해 드릴게요.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>코치마크 이미지 예시</h2>
+                <img src="https://i.pinimg.com/1200x/60/ef/97/60ef9721c6552374deda75a202b3ea12.jpg" alt="코치마크 예시 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>코치마크의 핵심 UX 원칙: "친절함은 딱 한 번만"</h2>
+                <p>코치마크는 사용자에게 매우 강력한 시각적 방해 요소가 될 수 있습니다. 따라서 무분별하게 사용하면 오히려 사용자의 짜증을 유발합니다.</p>
+                <ul>
+                    <li><strong>최초 1회 노출:</strong> 사용자가 이미 기능을 배웠다면 다시 보여줄 필요가 없습니다. localStorage나 Cookie를 활용해 한 번 본 사용자에게는 다시 노출하지 않는 것이 국룰입니다.</li>
+                    <li><strong>명확한 스포트라이트:</strong> 안내하려는 요소만 밝게 비추고(Spotlight), 나머지 영역은 어둡게 처리하여 시선을 집중시킵니다.</li>
+                    <li><strong>쉬운 탈출구:</strong> 사용자가 가이드를 보고 싶지 않을 때 언제든 닫을 수 있는 '건너뛰기(Skip)' 혹은 'X' 버튼이 반드시 있어야 합니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>코치마크를 설계하는 3가지 전략</h2>
+                <ul>
+                    <li>
+                        <strong>스포트라이트:</strong> 가장 중요한 단일 기능을 강조
+                        <br><em>적합한 상황:</em> 복잡한 앱에서 핵심 버튼 하나를 강조할 때
+                    </li>
+                    <li>
+                        <strong>단계별 투어:</strong> 1~5단계 순서대로 설명
+                        <br><em>적합한 상황:</em> 대규모 대시보드나 복잡한 입력 폼이 있을 때
+                    </li>
+                    <li>
+                        <strong>툴팁형 코치마크:</strong> 요소 주변에 말풍선 형태로 설명
+                        <br><em>적합한 상황:</em> 메뉴 항목이나 새로운 기능을 살짝 알릴 때
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 구현 방법 (핵심 원리)</h2>
+                <p>코치마크를 구현할 때 가장 중요한 것은 CSS의 z-index를 이용한 계층 관리입니다. 안내하려는 버튼이 배경보다 위에 있어야겠죠?</p>
+
+                <h3>간단한 로직 (jQuery)</h3>
+                <ol>
+                    <li>사용자가 페이지에 접속합니다.</li>
+                    <li>localStorage를 확인합니다. ('coachMarkShown' 키가 있으면 패스, 없으면 실행)</li>
+                    <li>어두운 배경(Overlay)을 화면 전체에 덮습니다.</li>
+                    <li>안내할 버튼의 z-index를 높여서 어두운 배경 위로 튀어나오게 합니다.</li>
+                    <li>버튼 옆에 설명 말풍선을 띄웁니다.</li>
+                    <li>'닫기'를 누르면 배경을 제거하고, localStorage에 값을 저장합니다.</li>
+                </ol>
+
+                <h3>간단한 CSS 스타일</h3>
+                <pre class="code-block"><code>/* 안내 중인 요소 강조 */
+.spotlight {
+  position: relative;
+  z-index: 9999; /* 오버레이보다 높게 설정 */
+}
+
+/* 어두운 배경 오버레이 */
+.coach-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9998;
+}</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실제 데모</h2>
+                <p>아래 버튼을 클릭하면 코치마크 데모를 볼 수 있습니다.</p>
+                <button id="startCoachBtn" style="padding: 12px 24px; background: var(--point); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-bottom: 20px;">코치마크 시작</button>
+                <p><em>주의: 한 번 닫으면 localStorage에 저장되어 이 페이지를 새로고침할 때까지 다시 나타나지 않습니다.</em></p>
+
+                <div id="coachOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9998;"></div>
+                <div id="coachSpotlight" style="display: none; position: fixed; border: 2px solid #fff; box-shadow: 0 0 0 9999px rgba(0,0,0,0.7); border-radius: 10px; z-index: 9999; pointer-events: none;"></div>
+
+                <div id="coachTooltip" style="display: none; position: fixed; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); z-index: 10000; max-width: 320px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                        <h3 style="margin: 0; font-size: 16px; color: var(--text);">기능 안내</h3>
+                        <button id="coachCloseBtn" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #999;">&times;</button>
+                    </div>
+                    <p id="coachMessage" style="margin: 0; font-size: 14px; color: var(--subtext); line-height: 1.5;"></p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>교수님의 실전 가이드: "왜 코치마크가 필요할까?"</h2>
+                <p>코치마크는 UI가 너무 복잡하다는 반증일 수도 있습니다.</p>
+                <blockquote>
+                    <p>"사실 가장 좋은 UI는 코치마크 없이도 사용자가 직관적으로 기능을 알아챌 수 있는 디자인입니다. 코치마크를 5단계 이상 길게 넣어야 한다면, UI 자체를 더 쉽게 고치는 게 우선입니다. 코치마크는 정말 중요하고, 사용자가 스스로 찾기 어려운 '핵심 기능'을 알려줄 때만 사용하세요."</p>
+                </blockquote>
+            </section>
+
+            <section class="content-section">
+                <h2>마지막 체크리스트</h2>
+                <ul>
+                    <li><strong>모바일 대응:</strong> 모바일은 화면이 작아서 코치마크가 화면을 덮어버리면 아주 답답합니다. 모바일에서는 투어 방식보다는 '빈 공간에 힌트 카드'를 띄우는 것이 더 좋습니다.</li>
+                    <li><strong>접근성:</strong> 스크린 리더 사용자가 코치마크를 만났을 때 시스템이 멈춘 것으로 오해하지 않도록 적절한 접근성 태그를 꼭 넣어야 합니다.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+    <style>
+        .coach-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+        }
+
+        .coach-spotlight {
+            display: none;
+            position: fixed;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .coach-tooltip {
+            display: none;
+            position: fixed;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            max-width: 320px;
+        }
+
+        .coach-tooltip h3 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .coach-tooltip p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--subtext);
+            line-height: 1.5;
+        }
+
+        .coach-tooltip button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            var coachMarkKey = 'coachMarkShown';
+            var currentStep = 0;
+            var steps = [
+                {
+                    target: '#menu-search',
+                    text: '여기에 검색어를 입력하면 메뉴를 빠르게 찾을 수 있습니다. 원하는 기능명을 입력해 보세요.'
+                }
+            ];
+
+            function showCoachMark(step) {
+                if (step >= steps.length) {
+                    closeCoachMark();
+                    return;
+                }
+
+                var targetSelector = steps[step].target;
+                var $target = $(targetSelector);
+                if ($target.length === 0) {
+                    closeCoachMark();
+                    return;
+                }
+
+                var offset = $target.offset();
+                var width = $target.outerWidth();
+                var height = $target.outerHeight();
+                var scrollTop = $(window).scrollTop();
+                var scrollLeft = $(window).scrollLeft();
+                var viewportTop = offset.top - scrollTop;
+                var viewportLeft = offset.left - scrollLeft;
+
+                $('#coachOverlay').show();
+                $('#coachSpotlight').css({
+                    top: viewportTop - 8 + 'px',
+                    left: viewportLeft - 8 + 'px',
+                    width: width + 16 + 'px',
+                    height: height + 16 + 'px',
+                    display: 'block'
+                });
+
+                $('#coachMessage').text(steps[step].text);
+                $('#coachTooltip').css({
+                    top: viewportTop + height + 16 + 'px',
+                    left: viewportLeft + 'px'
+                }).show();
+
+                currentStep = step;
+            }
+
+            function closeCoachMark() {
+                $('#coachOverlay').hide();
+                $('#coachSpotlight').hide();
+                $('#coachTooltip').hide();
+                localStorage.setItem(coachMarkKey, 'true');
+            }
+
+            $('#startCoachBtn').on('click', function() {
+                localStorage.removeItem(coachMarkKey);
+                currentStep = 0;
+                showCoachMark(0);
+            });
+
+            $('#coachCloseBtn').on('click', function() {
+                closeCoachMark();
+            });
+
+            $('#coachTooltip').on('click', function(e) {
+                if ($(e.target).closest('#coachCloseBtn').length === 0) {
+                    closeCoachMark();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

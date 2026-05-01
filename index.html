@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 홈</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>UI/UX 학습 사이트</h1>
+                <p class="lead-text">
+                    HTML, CSS, JavaScript, jQuery 3.7 기반으로 학습할 수 있는 기본 페이지입니다.
+                    왼쪽 메뉴에서 기능별 페이지로 이동해보세요.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>1. 이미지</h2>
+                <img src="./asstes/images/menu-banner.svg" alt="학습용 샘플 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>2. 프롬프트</h2>
+                <div class="content-card">
+                    "버튼 클릭 시 사용자에게 피드백을 주는 마이크로 인터랙션 UI를 만들어줘."
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>3. 코드</h2>
+                <pre class="code-block"><code>&lt;button class="sample-btn"&gt;클릭&lt;/button&gt;
+$('.sample-btn').on('click', function () {
+    alert('클릭 이벤트가 실행되었습니다.');
+});</code></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

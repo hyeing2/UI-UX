@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 토스트</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>토스트(Toast) 학습</h1>
+                <p class="lead-text">
+                    토스트(Toast)는 토스트기에서 빵이 툭 튀어나오는 것처럼, 화면의 특정 위치에 잠시 나타났다가 자동으로 사라지는 작은 알림 창을 말합니다.
+                    사용자의 흐름을 완전히 끊는 알럿(Alert)이나 모달(Modal)과 달리, "방해하지 않고 정보를 전달하는 것"이 토스트 UI의 핵심입니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl9dhjFYDBbae_pczaIxcWwRQpPP4O71DZA&s"
+                    alt="토스트 알림 예시 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>설명</h2>
+
+                <h3>1. 토스트 UI의 핵심 UX 원칙</h3>
+                <ul class="plain-list">
+                    <li><strong>비차단성 (Non-blocking)</strong>: 화면의 일부분만 차지하며 배경을 어둡게 만들지 않습니다. 토스트가 떠 있어도 스크롤/클릭 등 기존 작업을 계속할 수 있어야 합니다.</li>
+                    <li><strong>휘발성 (Ephemeral)</strong>: 사용자가 직접 닫지 않아도 3~5초 내외로 자연스럽게 사라져야 합니다. 너무 빠르면 읽지 못하고, 너무 느리면 방해가 됩니다.</li>
+                    <li><strong>낮은 중요도 (Low Priority)</strong>: "삭제 확인" 같은 중요한 판단은 알럿/모달이 적합합니다. 토스트는 "저장 완료", "복사 완료", "새 메시지 도착" 같은 가벼운 결과 안내에 맞습니다.</li>
+                </ul>
+
+                <h3>2. UI 디자인 포인트</h3>
+                <ul class="plain-list">
+                    <li>위치: 모바일은 하단 중앙, 데스크탑은 우측 상단 또는 하단 중앙 배치가 일반적입니다.</li>
+                    <li>시각 스타일: 배경 대비가 있는 색상/그림자로 콘텐츠 위에서도 눈에 잘 띄게 설계합니다.</li>
+                    <li>애니메이션: 단순 노출보다 Slide-up/Fade-in 효과를 주면 훨씬 자연스럽고 고급스럽습니다.</li>
+                </ul>
+
+                <h3>4. 모달 vs 알럿 vs 토스트 비교</h3>
+                <div class="alert-compare">
+                    <div class="alert-compare-item"><strong>모달</strong> 강제성 높음(배경 차단), 버튼으로 닫힘, 상세 보기/회원가입 폼</div>
+                    <div class="alert-compare-item"><strong>알럿</strong> 강제성 매우 높음(흐름 중단), 확인 버튼으로 닫힘, 삭제 확인/심각한 오류</div>
+                    <div class="alert-compare-item"><strong>토스트</strong> 강제성 낮음(배경 유지), 자동 사라짐, 복사 완료/설정 변경 안내</div>
+                </div>
+
+                <h3>교수님의 팁</h3>
+                <div class="content-card">
+                    "사용자가 무언가 행동을 했을 때 '아, 내 요청이 잘 처리됐구나'라는 안심을 주는 용도로 토스트를 활용하세요.
+                    특히 모바일 환경에서는 알럿보다 토스트가 더 세련되고 사용자 경험이 좋습니다."
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>코드</h2>
+
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;button id="showToast"&gt;저장하기&lt;/button&gt;
+
+&lt;div id="toastContainer"&gt;
+  &lt;div class="toast-message"&gt;성공적으로 저장되었습니다!&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS</h3>
+                <pre class="code-block"><code>/* 토스트 전체 위치 설정 */
+#toastContainer {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+/* 토스트 상자 스타일 */
+.toast-message {
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  animation: fadeInUp 0.5s;
+}
+
+/* 아래에서 위로 올라오는 애니메이션 */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}</code></pre>
+
+                <h3>jQuery</h3>
+                <pre class="code-block"><code>$(document).ready(function() {
+  $('#showToast').on('click', function() {
+    $('.toast-message').fadeIn(400);
+
+    setTimeout(function() {
+      $('.toast-message').fadeOut(400);
+    }, 3000);
+  });
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <button id="showToast" class="primary-btn" type="button">저장하기</button>
+            </section>
+        </main>
+    </div>
+
+    <div id="toastContainer">
+        <div class="toast-message">성공적으로 저장되었습니다!</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

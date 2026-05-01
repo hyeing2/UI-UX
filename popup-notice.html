@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업 안내</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 24px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f7f9ff;
+            color: #1f2937;
+        }
+
+        .popup-wrap {
+            max-width: 420px;
+            margin: 0 auto;
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid #dbe3f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .popup-image {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #e5eaf4;
+        }
+
+        .btn-row {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        button {
+            border: 1px solid #c8d3e7;
+            border-radius: 8px;
+            background: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-wrap">
+        <h2>PCR 검사결과 및 통지서 확인</h2>
+        <img
+            src="https://cms.pixso.net/images/kr/articles/2022/news/popup-design1.png"
+            alt="팝업 예시 이미지"
+            class="popup-image"
+        >
+        <div class="btn-row">
+            <button id="hideToday" type="button">오늘 하루 창을 열지 않습니다.</button>
+            <button id="closePopup" type="button">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var hideBtn = document.getElementById("hideToday");
+            var closeBtn = document.getElementById("closePopup");
+
+            hideBtn.addEventListener("click", function () {
+                var today = new Date().toISOString().slice(0, 10);
+                localStorage.setItem("popupHiddenDate", today);
+                window.close();
+            });
+
+            closeBtn.addEventListener("click", function () {
+                window.close();
+            });
+        })();
+    </script>
+</body>
+</html>

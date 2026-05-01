@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 팝업</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>팝업(Popup) 학습</h1>
+                <p class="lead-text">
+                    팝업은 현재 브라우저 페이지 위에 완전히 독립된 새 브라우저 창을 띄우는 방식입니다.
+                    모달이 웹사이트 내부 레이어라면, 팝업은 브라우저가 관리하는 별개의 창입니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://cms.pixso.net/images/kr/articles/2022/news/popup-design1.png"
+                    alt="팝업 디자인 참고 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>1. 핵심 개념: 독립성과 병렬성</h2>
+                <p class="lead-text">
+                    팝업의 핵심은 부모 창과 자식 창이 동시에 상호작용 가능하다는 점입니다.
+                    사용자는 팝업 정보를 보면서 원래 화면에서 입력/클릭을 병행할 수 있습니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>2. UX 장점과 단점</h2>
+                <div class="content-card">
+                    <strong>장점</strong><br>
+                    - 참조용 정보 제공(도움말/가이드)<br>
+                    - 외부 서비스 연동(PG 결제, 본인 인증, 소셜 로그인)<br>
+                    - 독립된 도구(실시간 채팅, 주식 차트)<br><br>
+                    <strong>단점</strong><br>
+                    - 브라우저 자동 팝업 차단 가능성<br>
+                    - 모바일에서 새 탭으로 열려 흐름 단절<br>
+                    - 중복 팝업/창 관리 어려움
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>3. 설계 체크리스트</h2>
+                <div class="content-card">
+                    - 사용자 액션(버튼 클릭)으로만 실행<br>
+                    - 콘텐츠에 맞는 크기와 위치 사용<br>
+                    - 공지형은 "오늘 하루 보지 않기" 제공<br>
+                    - 팝업을 전면으로 올려 포커스 명확화
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>4. 실전 코드 예시</h2>
+                <pre class="code-block"><code>// 팝업 열기 함수
+function openPopup() {
+    window.open(
+        'popup-notice.html',
+        'popupName',
+        'width=500,height=600,top=100,left=100,scrollbars=yes'
+    );
+}
+
+// jQuery를 사용한 버튼 이벤트 연결
+$('#btnPopup').on('click', function() {
+    openPopup();
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <button id="btnPopup" class="primary-btn" type="button">팝업 열기</button>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 플레이스홀더</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>플레이스홀더(Placeholder)</h1>
+                <p class="lead-text">
+                    플레이스홀더(Placeholder)는 인풋 필드(Input Field) 내부에 아주 연한 회색 글씨로 적혀있는 힌트 문구입니다. 사용자가 무엇을 입력해야 할지 망설일 때 길잡이 역할을 하죠. 하지만 이 작은 텍스트 하나가 UX에서는 "천사"가 될 수도, "악마"가 될 수도 있습니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>플레이스홀더 이미지 예시</h2>
+                <img src="https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2021/07/15132352/%EB%82%98%EB%85%B89.png" alt="플레이스홀더 예시 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>플레이스홀더의 핵심 역할</h2>
+                <ul>
+                    <li><strong>예시 제공:</strong> "예: 010-1234-5678"처럼 데이터 형식을 알려줄 때 가장 유용합니다.</li>
+                    <li><strong>단기 힌트:</strong> 검색창에 "상품명을 입력하세요"라고 적어두어 사용자가 무엇을 하는 곳인지 즉시 알게 합니다.</li>
+                    <li><strong>공간 활용:</strong> 화면이 좁을 때 보조 설명을 넣기에 좋습니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>절대 하지 말아야 할 '치명적인 실수'</h2>
+                <p>플레이스홀더를 레이블(Label) 대신 쓰지 마세요.</p>
+                <div class="content-card" style="background: #f9fafc; border: 1px solid var(--line); padding: 16px;">
+                    <strong>나쁜 설계 (Anti-Pattern)</strong><br>
+                    - 플레이스홀더가 사라져서 입력 내용을 기억하지 못함<br>
+                    - 스크린 리더가 읽기 어려워짐<br>
+                    - 사용자가 입력 창 밖에서 정보를 확인하기 어려움
+                </div>
+                <div class="content-card" style="background: #ffffff; border: 1px solid var(--line); padding: 16px; margin-top: 12px;">
+                    <strong>좋은 설계 (Best Practice)</strong><br>
+                    - 레이블은 항상 입력창 위에 고정<br>
+                    - 레이블과 입력창이 명확히 연결되어 정보 전달 완벽<br>
+                    - 사용자가 입력하기 전에 바로 정보 확인 가능
+                </div>
+                <p><strong>핵심:</strong> 레이블은 '제목'이고, 플레이스홀더는 '설명'입니다.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>올바른 활용 가이드 (Best Practices)</h2>
+                <ul>
+                    <li><strong>보조 정보만 담기:</strong> 사용자가 이미 알고 있는 정보라면 플레이스홀더를 쓰지 마세요.</li>
+                    <li><strong>예시를 보여주기:</strong> "이메일 주소"보다 "example@email.com"처럼 형식을 보여주는 것이 더 친절합니다.</li>
+                    <li><strong>간결함 유지:</strong> 플레이스홀더가 너무 길면 입력창이 지저분해 보입니다. 핵심만 적으세요.</li>
+                    <li><strong>명확한 대비:</strong> 너무 진하면 사용자가 이미 입력된 값으로 착각할 수 있습니다. 보통 #999 또는 #ccc 정도의 연한 회색을 사용하세요.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 코드 예시 (HTML)</h2>
+                <pre class="code-block"><code>&lt;input type="text" placeholder="이름"&gt;
+
+&lt;div class="form-group"&gt;
+  &lt;label for="user-name"&gt;이름&lt;/label&gt;
+  &lt;input type="text" id="user-name" placeholder="홍길동"&gt;
+&lt;/div&gt;
+
+&lt;div class="form-group"&gt;
+  &lt;label for="birth-date"&gt;생년월일&lt;/label&gt;
+  &lt;input type="date" id="birth-date" placeholder="YYYY-MM-DD"&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>교수님의 실전 팁</h2>
+                <blockquote>
+                    <p>"사용자에게 친절한 서비스를 만들고 싶다면, <strong>'플레이스홀더를 모두 지워도 사용자가 입력하는 데 아무런 문제가 없는지'</strong>를 스스로 자문해 보세요. 만약 지웠을 때 사용자가 혼란을 느낀다면, 그건 플레이스홀더로 해결할 게 아니라 레이블을 더 명확하게 고치거나 헬퍼 텍스트를 추가해야 한다는 신호입니다."</p>
+                </blockquote>
+            </section>
+
+            <section class="content-section">
+                <h2>실제 데모</h2>
+                <form style="max-width: 640px;">
+                    <div class="input-group">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" placeholder="홍길동" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" placeholder="example@email.com" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">전화번호</label>
+                        <input type="tel" id="phone" placeholder="010-1234-5678" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

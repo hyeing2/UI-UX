@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 알럿</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>알럿(Alert) 학습</h1>
+                <p class="lead-text">
+                    알럿(Alert)은 사용자에게 중요한 상태 변화나 경고, 혹은 확인이 필요한 상황을 알리기 위해 나타나는 인터페이스입니다.
+                    넓은 의미에서는 모달(Modal)의 한 종류에 속하지만, 그 목적과 무게감이 훨씬 긴급하다는 차이가 있습니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://blog.kakaocdn.net/dna/bf5zPn/btrUEwjZJVr/AAAAAAAAAAAAAAAAAAAAAGjHv0OoMQJ_VmIM8DAVrLklEeS4EXJml2zzgmvNunJC/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=mX0K9Fvr1fwppHkau5ajgsjAzlU%3D"
+                    alt="알럿 예시 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>설명</h2>
+                <h3>1. 브라우저 기본 알럿 vs 커스텀 알럿 UI</h3>
+                <ul class="plain-list">
+                    <li>기본 알럿(`window.alert()`): 브라우저가 제공하는 시스템 창입니다. 디자인 수정이 불가능하고, 확인을 누르기 전까지 브라우저의 모든 동작이 멈춥니다. 투박하기 때문에 실제 서비스에서는 거의 사용하지 않습니다.</li>
+                    <li>커스텀 알럿 UI: HTML/CSS로 직접 만든 알럿입니다. 브랜드 디자인에 맞출 수 있고, 부드러운 애니메이션을 넣을 수 있어 대부분의 서비스가 이 방식을 택합니다.</li>
+                </ul>
+
+                <h3>2. 알럿 UI의 핵심 UX 원칙</h3>
+                <ul class="plain-list">
+                    <li>명확한 피드백(Clear Feedback): 사용자의 행동 결과를 즉각적으로 전달합니다. 성공(저장이 완료되었습니다), 오류(결제에 실패했습니다. 잔액을 확인하세요), 경고(정말 삭제하시겠습니까? 복구할 수 없습니다).</li>
+                    <li>간결한 문구(Copywriting): 긴 설명보다 짧고 명확한 문장을 사용합니다. 예) "페이지를 불러오지 못했습니다. 다시 시도해 주세요."</li>
+                    <li>버튼의 강조와 대비: 긍정 버튼은 브랜드/강조 색상, 취소 버튼은 무채색이나 아웃라인 스타일로 구분합니다.</li>
+                </ul>
+
+                <h3>3. UI 디자인 요소 (Visual Elements)</h3>
+                <ul class="plain-list">
+                    <li>아이콘(Icon): 체크(성공), 느낌표(경고), X(에러) 아이콘으로 텍스트 읽기 전 상태를 인지시킵니다.</li>
+                    <li>컬러(Color): 에러는 빨간색, 경고는 노란색/주황색, 성공은 초록색/파란색을 주로 사용합니다.</li>
+                    <li>배경 레이어: 모달과 마찬가지로 배경을 어둡게 처리해 알럿에 집중하게 만듭니다.</li>
+                </ul>
+
+                <h3>4. 알럿(Alert) vs 모달(Modal) 비교</h3>
+                <div class="alert-compare">
+                    <div class="alert-compare-item"><strong>목적</strong> 알럿: 결과 알림/경고/최종 확인, 모달: 정보 입력/상세 보기/설정</div>
+                    <div class="alert-compare-item"><strong>콘텐츠 양</strong> 알럿: 매우 적음(1~2줄), 모달: 많음(폼/이미지/리스트)</div>
+                    <div class="alert-compare-item"><strong>사용자 입력</strong> 알럿: 확인/취소 중심, 모달: 텍스트 입력/체크박스 등 다양</div>
+                    <div class="alert-compare-item"><strong>긴급도</strong> 알럿: 매우 높음(즉시 인지), 모달: 보통(흐름상의 단계)</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>코드</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;div class="alert-overlay"&gt;
+  &lt;div class="alert-box"&gt;
+    &lt;div class="alert-icon error"&gt;!&lt;/div&gt;
+    &lt;h3 class="alert-title"&gt;삭제 확인&lt;/h3&gt;
+    &lt;p class="alert-message"&gt;작성하신 글을 정말 삭제할까요?&lt;/p&gt;
+    &lt;div class="alert-buttons"&gt;
+      &lt;button class="btn-cancel"&gt;취소&lt;/button&gt;
+      &lt;button class="btn-confirm"&gt;삭제하기&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS (핵심 스타일)</h3>
+                <pre class="code-block"><code>.alert-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex; justify-content: center; align-items: center;
+}
+.alert-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.btn-confirm {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}</code></pre>
+
+                <h3>JavaScript / jQuery</h3>
+                <pre class="code-block"><code>// 기본 알럿
+window.alert("나는 기본 얼럿창 입니다!");
+
+// 커스텀 알럿 열기/닫기
+$('#openCustomAlert').on('click', function () {
+  $('#customAlert').removeClass('hidden');
+});
+$('#cancelCustomAlert, #closeCustomAlert').on('click', function () {
+  $('#customAlert').addClass('hidden');
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <button id="openBasicAlert" class="secondary-btn" type="button">기본 알럿 열기</button>
+                <button id="openCustomAlert" class="primary-btn" type="button">커스텀 알럿 열기</button>
+            </section>
+        </main>
+    </div>
+
+    <div id="customAlert" class="alert-overlay hidden" aria-hidden="true">
+        <div class="alert-box" role="alertdialog" aria-modal="true" aria-labelledby="alertTitle">
+            <div class="alert-icon error">!</div>
+            <h3 id="alertTitle" class="alert-title">삭제 확인</h3>
+            <p class="alert-message">작성하신 글을 정말 삭제할까요?</p>
+            <div class="alert-buttons">
+                <button id="cancelCustomAlert" class="btn-cancel" type="button">취소</button>
+                <button id="confirmCustomAlert" class="btn-confirm" type="button">삭제하기</button>
+            </div>
+            <button id="closeCustomAlert" class="secondary-btn" type="button" style="margin-top:10px;">닫기</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>

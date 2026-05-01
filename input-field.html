@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 인풋 필드</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>인풋 필드(Input Field)</h1>
+                <p class="lead-text">
+                    인풋 필드(Input Field)는 웹사이트에서 사용자가 데이터를 입력할 수 있는 가장 기본적인 인터페이스입니다. 단순히 글자를 입력하는 상자처럼 보이지만, 사용자와 서비스가 소통하는 핵심 통로이기 때문에 UX적으로 매우 정교하게 설계해야 합니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>인풋 필드 이미지 예시</h2>
+                <img src="https://velog.velcdn.com/images%2Foneook%2Fpost%2Fa02495b7-751e-41d5-bc05-db74778018e3%2F1_QgJxq8jKBSfYUVezVoOqGg.jpeg" alt="인풋 필드 예시 이미지" class="content-image">
+            </section>
+
+            <section class="content-section">
+                <h2>인풋 필드의 해부학 (Anatomy)</h2>
+                <ul>
+                    <li><strong>레이블(Label):</strong> "이름", "이메일"처럼 이 칸에 무엇을 넣어야 하는지 알려주는 제목입니다. 항상 노출하는 것이 원칙입니다.</li>
+                    <li><strong>플레이스홀더(Placeholder):</strong> 입력란 안에 흐릿하게 보이는 예시 텍스트입니다. "예: 홍길동" 등 형식을 안내하는 용도로 씁니다. (절대 레이블을 대체해서는 안 됩니다!)</li>
+                    <li><strong>헬퍼 텍스트(Helper Text):</strong> 비밀번호 조건(8자 이상, 특수문자 포함)처럼 부가적인 설명을 제공합니다.</li>
+                    <li><strong>피드백(Validation):</strong> 입력이 끝난 후, 성공(초록색 테두리)인지 오류(빨간색 테두리와 에러 메시지)인지 알려줍니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>입력 타입에 따른 분류</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>타입</th>
+                            <th>설명</th>
+                            <th>모바일 키보드 반응</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td>일반 텍스트 입력</td>
+                            <td>일반 문자판</td>
+                        </tr>
+                        <tr>
+                            <td>password</td>
+                            <td>비밀번호 (글자 숨김)</td>
+                            <td>일반 문자판</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>이메일 주소 (@ 표시 포함)</td>
+                            <td>@ 기호 포함된 키보드</td>
+                        </tr>
+                        <tr>
+                            <td>number</td>
+                            <td>숫자 전용</td>
+                            <td>숫자 패드</td>
+                        </tr>
+                        <tr>
+                            <td>tel</td>
+                            <td>전화번호</td>
+                            <td>전화번호 패드</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 디자인 & 개발 체크리스트</h2>
+                <ul>
+                    <li><strong>레이블은 필수입니다:</strong> 플레이스홀더는 글자를 입력하는 순간 사라집니다. 만약 입력하다가 내용이 기억나지 않으면 사용자는 다시 지워봐야 합니다. 레이블을 인풋 상자 위에 항상 배치하세요.</li>
+                    <li><strong>피드백은 즉각적으로:</strong> 사용자가 입력하자마자 오류를 확인하게 하는 것이 좋습니다. (예: 이메일 형식이 틀렸을 때 실시간으로 경고)</li>
+                    <li><strong>포커스 상태(Focus State) 표시:</strong> 사용자가 현재 어디에 입력하고 있는지 명확하게 알려주기 위해, 클릭했을 때 테두리 색상이 바뀌거나 그림자가 생기도록 CSS를 설정해야 합니다.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>실전 코드 예시 (HTML/CSS/jQuery)</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;div class="input-group"&gt;
+  &lt;label for="username"&gt;사용자 이름&lt;/label&gt;
+  &lt;input type="text" id="username" placeholder="이름을 입력하세요"&gt;
+  &lt;span class="error-msg" style="display:none; color:red;"&gt;이름을 입력해주세요!&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS</h3>
+                <pre class="code-block"><code>.input-group { margin-bottom: 20px; }
+
+label { display: block; margin-bottom: 8px; font-weight: bold; }
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}</code></pre>
+
+                <h3>jQuery (간단한 유효성 검사)</h3>
+                <pre class="code-block"><code>$(document).ready(function() {
+  $('#username').on('blur', function() {
+    if ($(this).val() === "") {
+      $(this).css('border-color', 'red');
+      $(this).next('.error-msg').show();
+    } else {
+      $(this).css('border-color', '#ccc');
+      $(this).next('.error-msg').hide();
+    }
+  });
+});</code></pre>
+
+                <blockquote>
+                    <p>"많은 초보 개발자들이 플레이스홀더를 레이블처럼 사용하려고 합니다. 하지만 이는 접근성(스크린 리더)이나 사용성 측면에서 피해야 할 관행입니다. 레이블은 항상 밖에 꺼내두세요. 그것이 가장 친절하고 전문적인 UI입니다."</p>
+                </blockquote>
+            </section>
+
+            <section class="content-section">
+                <h2>실제 데모</h2>
+                <form id="inputForm" style="max-width: 600px;">
+                    <div class="input-group">
+                        <label for="username">사용자 이름</label>
+                        <input type="text" id="username" placeholder="이름을 입력하세요">
+                        <span class="error-msg" style="display:none; color:#d32f2f; font-size: 13px;">이름을 입력해주세요!</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" placeholder="example@domain.com">
+                        <span class="error-msg" style="display:none; color:#d32f2f; font-size: 13px;">유효한 이메일을 입력해주세요!</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" placeholder="8자 이상 입력하세요">
+                        <span class="error-msg" style="display:none; color:#d32f2f; font-size: 13px;">비밀번호는 8자 이상이어야 합니다.</span>
+                    </div>
+                    <button type="submit" style="padding: 12px 24px; background: var(--point); color: #fff; border: none; border-radius: 6px; cursor: pointer;">제출</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+    <script>
+        $(document).ready(function() {
+            function validateEmail(value) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            }
+
+            $('#username').on('blur', function() {
+                var value = $(this).val().trim();
+                if (!value) {
+                    $(this).css('border-color', '#d32f2f');
+                    $(this).next('.error-msg').show();
+                } else {
+                    $(this).css('border-color', '#ccc');
+                    $(this).next('.error-msg').hide();
+                }
+            });
+
+            $('#email').on('blur', function() {
+                var value = $(this).val().trim();
+                if (!validateEmail(value)) {
+                    $(this).css('border-color', '#d32f2f');
+                    $(this).next('.error-msg').show();
+                } else {
+                    $(this).css('border-color', '#ccc');
+                    $(this).next('.error-msg').hide();
+                }
+            });
+
+            $('#password').on('blur', function() {
+                var value = $(this).val();
+                if (value.length < 8) {
+                    $(this).css('border-color', '#d32f2f');
+                    $(this).next('.error-msg').show();
+                } else {
+                    $(this).css('border-color', '#ccc');
+                    $(this).next('.error-msg').hide();
+                }
+            });
+
+            $('#inputForm').on('submit', function(e) {
+                e.preventDefault();
+                $('#username, #email, #password').trigger('blur');
+
+                var hasError = false;
+                $('.error-msg').each(function() {
+                    if ($(this).is(':visible')) {
+                        hasError = true;
+                    }
+                });
+
+                if (!hasError) {
+                    alert('모든 입력이 정상적으로 완료되었습니다!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

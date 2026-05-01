@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 학습 사이트 - 캐러셀</title>
+    <link rel="stylesheet" href="./asstes/css/common.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+            <section class="content-section">
+                <h1>캐러셀(Carousel) 학습</h1>
+                <p class="lead-text">
+                    캐러셀(Carousel)은 회전목마처럼 여러 콘텐츠를 가로 슬라이드로 보여주는 UI 컴포넌트입니다.
+                    한정된 화면에서 정보 압축과 시각적 강조를 동시에 달성할 때 자주 사용됩니다.
+                </p>
+            </section>
+
+            <section class="content-section">
+                <h2>이미지</h2>
+                <img
+                    src="https://codeit-assets.s3.ap-northeast-2.amazonaws.com/tutorials/temp/card.png"
+                    alt="캐러셀 UI 예시 이미지"
+                    class="content-image"
+                >
+            </section>
+
+            <section class="content-section">
+                <h2>설명</h2>
+                <h3>1. 캐러셀의 핵심 구성 요소</h3>
+                <ul class="plain-list">
+                    <li>트랙(Track/Stage): 슬라이드가 가로로 움직이는 통로</li>
+                    <li>아이템(Item/Slide): 배너/카드/텍스트 등 개별 콘텐츠</li>
+                    <li>내비게이션(Navigation): 이전/다음 버튼</li>
+                    <li>인디케이터(Indicators/Dots): 현재 슬라이드 위치 표시</li>
+                </ul>
+
+                <h3>2. 캐러셀의 UX/UI 목적</h3>
+                <ul class="plain-list">
+                    <li><strong>공간 효율성</strong>: 좁은 화면에서 많은 콘텐츠를 세로 길이 증가 없이 보여줄 수 있습니다.</li>
+                    <li><strong>시각적 강조와 몰입</strong>: 메인 배너에서 주요 프로모션을 집중 노출하고 동적인 인상을 만듭니다.</li>
+                </ul>
+
+                <h3>3. 설계 시 주의점</h3>
+                <ul class="plain-list">
+                    <li>첫 슬라이드 이후 클릭률이 급감할 수 있으므로 가장 중요한 메시지는 첫 장에 배치해야 합니다.</li>
+                    <li>자동 재생이 빠르면 피로도와 접근성 이슈가 커집니다.</li>
+                    <li>사용자가 멈춤/직접 제어할 수 있는 장치를 제공하는 것이 좋습니다.</li>
+                </ul>
+
+                <h3>5. 캐러셀 vs 카드 UI</h3>
+                <div class="alert-compare">
+                    <div class="alert-compare-item"><strong>캐러셀</strong> 소수 핵심 정보 강조, 공간 절약, 수동 탐색 필요</div>
+                    <div class="alert-compare-item"><strong>카드 그리드</strong> 다량 정보 한눈 탐색, 화면 점유 큼, 능동 탐색에 강함</div>
+                </div>
+
+                <h3>교수님의 실전 가이드</h3>
+                <div class="content-card">
+                    "캐러셀은 속도와 정지 기능이 핵심입니다. Hover 시 자동재생 멈춤만 넣어도 UX가 좋아집니다.
+                    모바일은 스와이프를 고려해 Swiper/Slick 같은 라이브러리 활용이 실무에서 일반적입니다."
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>코드</h2>
+                <h3>HTML</h3>
+                <pre class="code-block"><code>&lt;div class="carousel-container"&gt;
+  &lt;div class="carousel-track"&gt;
+    &lt;div class="slide-item item1"&gt;첫 번째 배너&lt;/div&gt;
+    &lt;div class="slide-item item2"&gt;두 번째 배너&lt;/div&gt;
+    &lt;div class="slide-item item3"&gt;세 번째 배너&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button class="btn-prev"&gt;이전&lt;/button&gt;
+  &lt;button class="btn-next"&gt;다음&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>CSS</h3>
+                <pre class="code-block"><code>.carousel-container {
+  width: 1280px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+.carousel-track {
+  display: flex;
+  width: 300%;
+  transition: transform 0.5s ease;
+}
+.slide-item {
+  width: 1280px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-prev, .btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}</code></pre>
+
+                <h3>jQuery (동작 제어)</h3>
+                <pre class="code-block"><code>$(document).ready(function() {
+  let currentIndex = 0;
+  const slideWidth = 1280;
+
+  $('.btn-next').on('click', function() {
+    if (currentIndex &lt; 2) {
+      currentIndex++;
+      moveSlide();
+    }
+  });
+
+  $('.btn-prev').on('click', function() {
+    if (currentIndex &gt; 0) {
+      currentIndex--;
+      moveSlide();
+    }
+  });
+
+  function moveSlide() {
+    let offset = -(currentIndex * slideWidth);
+    $('.carousel-track').css('transform', 'translateX(' + offset + 'px)');
+  }
+});</code></pre>
+            </section>
+
+            <section class="content-section">
+                <h2>실행</h2>
+                <div class="carousel-container carousel-demo">
+                    <div class="carousel-track">
+                        <div class="slide-item item1">첫 번째 배너</div>
+                        <div class="slide-item item2">두 번째 배너</div>
+                        <div class="slide-item item3">세 번째 배너</div>
+                    </div>
+
+                    <button class="btn-prev" type="button">이전</button>
+                    <button class="btn-next" type="button">다음</button>
+
+                    <div class="carousel-dots">
+                        <button class="carousel-dot is-active" data-index="0" aria-label="1번 슬라이드"></button>
+                        <button class="carousel-dot" data-index="1" aria-label="2번 슬라이드"></button>
+                        <button class="carousel-dot" data-index="2" aria-label="3번 슬라이드"></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+</body>
+</html>
