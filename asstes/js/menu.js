@@ -23,7 +23,8 @@
         { title: "플레이스홀더", href: "./placeholder.html", desc: "입력창 힌트 문구 UI" },
         { title: "로딩 스피너", href: "./spinner.html", desc: "로딩 상태 표시 UI" },
         { title: "토글", href: "./toggle.html", desc: "켜기/끄기 스위치 UI" },
-        { title: "프로그레스바", href: "./progress-bar.html", desc: "진행 상황 표시 UI" }
+        { title: "프로그레스바", href: "./progress-bar.html", desc: "진행 상황 표시 UI" },
+        { title: "문의하기", href: "./contact.html", desc: "서비스 문의 및 피드백" }
     ];
 
     function buildSidebar() {
@@ -64,6 +65,39 @@
         });
     }
 
+    function buildFooter() {
+        var year = new Date().getFullYear();
+        return (
+            '<footer class="site-footer">' +
+            '<div class="footer-inner">' +
+
+            '<div class="footer-top">' +
+            '<div class="footer-brand">' +
+            '<p class="footer-logo">UI/UX Study</p>' +
+            '<p class="footer-tagline">HTML · CSS · JavaScript · jQuery 3.7 기반<br>UI 컴포넌트 학습 사이트</p>' +
+            '</div>' +
+            '<nav class="footer-nav" aria-label="푸터 내비게이션">' +
+            '<a href="./index.html">홈</a>' +
+            '<a href="./contact.html">문의하기</a>' +
+            '</nav>' +
+            '</div>' +
+
+            '<hr class="footer-divider">' +
+
+            '<div class="footer-bottom">' +
+            '<p class="footer-copy">&copy; ' + year + ' UI/UX Study. All rights reserved.</p>' +
+            '<div class="footer-badges">' +
+            '<span class="footer-badge">jQuery 3.7</span>' +
+            '<span class="footer-badge">HTML5</span>' +
+            '<span class="footer-badge">CSS3</span>' +
+            '</div>' +
+            '</div>' +
+
+            '</div>' +
+            '</footer>'
+        );
+    }
+
     $(function () {
         var $root = $("#sidebar-root");
         if (!$root.length) {
@@ -72,5 +106,11 @@
 
         $root.html(buildSidebar());
         bindMenuSearch();
+
+        // 푸터를 .content-area 안 마지막에 주입
+        var $contentArea = $(".content-area");
+        if ($contentArea.length && !$contentArea.find(".site-footer").length) {
+            $contentArea.append(buildFooter());
+        }
     });
 })();

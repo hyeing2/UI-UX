@@ -962,3 +962,123 @@ input:checked + .slider:before {
         border-bottom: 1px solid var(--line);
     }
 }
+
+/* ── 푸터 ── */
+.site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+    padding: 28px 28px 24px;
+    margin-top: auto;
+}
+
+.footer-inner {
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-brand .footer-logo {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 6px;
+}
+
+.footer-brand .footer-tagline {
+    font-size: 0.82rem;
+    color: var(--subtext);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.footer-nav a {
+    font-size: 0.85rem;
+    color: var(--subtext);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.footer-nav a:hover {
+    background: var(--point-soft);
+    color: var(--point);
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 0;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: var(--subtext);
+    margin: 0;
+}
+
+.footer-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--subtext);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 3px 10px;
+    background: #f9fbff;
+}
+
+/* content-area가 푸터를 포함하도록 flex 컬럼 설정 */
+.content-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-area > main,
+.content-area {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .footer-top {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
