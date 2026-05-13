@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://in.me.kr/sitemap.xml

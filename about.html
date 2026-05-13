@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소개 - UI/UX Study | HTML·CSS·JS·jQuery 학습 사이트</title>
+    <meta name="description" content="UI/UX Study는 HTML, CSS, JavaScript, jQuery 3.7 기반의 UI 컴포넌트를 직접 만들고 학습할 수 있는 무료 학습 사이트입니다.">
+    <link rel="stylesheet" href="./asstes/css/common.css">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, #2b5cff 0%, #7c3aed 100%);
+            border-radius: 14px;
+            padding: 40px 28px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 0;
+            border: none;
+        }
+        .about-hero h1 {
+            font-size: 1.8rem;
+            margin: 0 0 12px;
+            color: #ffffff;
+        }
+        .about-hero p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+            opacity: 0.92;
+        }
+        .about-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        .about-stat-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 20px 16px;
+            background: #fbfcff;
+            text-align: center;
+        }
+        .about-stat-card .stat-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--point);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .about-stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--subtext);
+        }
+        .about-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .about-feature-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 20px;
+            background: #ffffff;
+        }
+        .about-feature-card .feat-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .about-feature-card h3 {
+            font-size: 0.98rem;
+            margin: 0 0 8px;
+            color: var(--text);
+        }
+        .about-feature-card p {
+            font-size: 0.88rem;
+            color: var(--subtext);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .about-stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .about-stack-list li {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            font-size: 0.88rem;
+            background: #f9fbff;
+            color: var(--text);
+            font-weight: 600;
+        }
+        .about-section-lead {
+            color: var(--subtext);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 0 0 16px;
+        }
+        .about-cta-wrap {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+        .about-cta-wrap a {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: filter 0.2s;
+        }
+        .about-cta-wrap a.primary {
+            background: var(--point);
+            color: #ffffff;
+            border: 1px solid var(--point);
+        }
+        .about-cta-wrap a.secondary {
+            background: #ffffff;
+            color: var(--point);
+            border: 1px solid var(--point);
+        }
+        .about-cta-wrap a:hover {
+            filter: brightness(1.08);
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6170369281719749"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+
+        <main class="content-area">
+
+            <!-- 히어로 -->
+            <section class="content-section about-hero">
+                <h1>UI/UX Study</h1>
+                <p>
+                    HTML, CSS, JavaScript, jQuery로 만드는<br>
+                    실전 UI 컴포넌트 학습 공간입니다.
+                </p>
+            </section>
+
+            <!-- 숫자로 보는 사이트 -->
+            <section class="content-section">
+                <h2>숫자로 보는 UI/UX Study</h2>
+                <div class="about-stat-grid">
+                    <div class="about-stat-card">
+                        <span class="stat-num">24+</span>
+                        <span class="stat-label">UI 컴포넌트</span>
+                    </div>
+                    <div class="about-stat-card">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-label">무료 학습</span>
+                    </div>
+                    <div class="about-stat-card">
+                        <span class="stat-num">4</span>
+                        <span class="stat-label">핵심 기술 스택</span>
+                    </div>
+                    <div class="about-stat-card">
+                        <span class="stat-num">0</span>
+                        <span class="stat-label">회원가입 불필요</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 사이트 소개 -->
+            <section class="content-section">
+                <h2>이 사이트는 무엇인가요?</h2>
+                <p class="about-section-lead">
+                    UI/UX Study는 웹 개발을 배우는 누구나 무료로 이용할 수 있는 <strong>UI 컴포넌트 학습 사이트</strong>입니다.
+                    이론 설명에 그치지 않고, 실제로 동작하는 데모와 함께 HTML·CSS·JavaScript·jQuery 코드를
+                    직접 확인하고 학습할 수 있도록 구성되어 있습니다.
+                </p>
+                <p class="about-section-lead">
+                    모달, 토스트, 캐러셀, 아코디언, 드롭다운 등 실무에서 자주 쓰이는 UI 패턴을
+                    하나씩 분해하여 설계 원칙부터 코드 구현까지 단계적으로 학습할 수 있습니다.
+                </p>
+            </section>
+
+            <!-- 주요 특징 -->
+            <section class="content-section">
+                <h2>주요 특징</h2>
+                <div class="about-feature-grid">
+                    <div class="about-feature-card">
+                        <span class="feat-icon">🎯</span>
+                        <h3>실전 중심 학습</h3>
+                        <p>이론과 함께 실제로 동작하는 데모를 제공합니다. 코드를 보고 바로 결과를 확인할 수 있습니다.</p>
+                    </div>
+                    <div class="about-feature-card">
+                        <span class="feat-icon">📱</span>
+                        <h3>반응형 디자인</h3>
+                        <p>모바일, 태블릿, 데스크톱 모든 환경에서 최적화된 학습 경험을 제공합니다.</p>
+                    </div>
+                    <div class="about-feature-card">
+                        <span class="feat-icon">♿</span>
+                        <h3>접근성 준수</h3>
+                        <p>ARIA 속성, 키보드 내비게이션 등 웹 접근성 기준을 준수한 코드 예제를 제공합니다.</p>
+                    </div>
+                    <div class="about-feature-card">
+                        <span class="feat-icon">🔍</span>
+                        <h3>메뉴 검색 기능</h3>
+                        <p>사이드바 검색으로 원하는 컴포넌트를 빠르게 찾아 학습할 수 있습니다.</p>
+                    </div>
+                    <div class="about-feature-card">
+                        <span class="feat-icon">💡</span>
+                        <h3>UX 설계 원칙</h3>
+                        <p>단순 코드 제공을 넘어 각 컴포넌트의 UX 설계 원칙과 사용 가이드라인을 함께 설명합니다.</p>
+                    </div>
+                    <div class="about-feature-card">
+                        <span class="feat-icon">🆓</span>
+                        <h3>완전 무료</h3>
+                        <p>회원가입 없이 누구나 무료로 모든 학습 콘텐츠를 이용할 수 있습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 기술 스택 -->
+            <section class="content-section">
+                <h2>사용 기술 스택</h2>
+                <p class="about-section-lead">
+                    별도의 프레임워크나 빌드 도구 없이 웹 표준 기술만으로 구현되어 있어,
+                    웹 개발 입문자도 쉽게 코드를 이해하고 응용할 수 있습니다.
+                </p>
+                <ul class="about-stack-list">
+                    <li>🌐 HTML5</li>
+                    <li>🎨 CSS3</li>
+                    <li>⚡ JavaScript (ES6+)</li>
+                    <li>📦 jQuery 3.7.1</li>
+                    <li>🚀 Netlify (호스팅)</li>
+                </ul>
+            </section>
+
+            <!-- 학습 대상 -->
+            <section class="content-section">
+                <h2>이런 분께 추천합니다</h2>
+                <ul style="padding-left: 20px; margin: 0;">
+                    <li style="color: var(--subtext); line-height: 2; font-size: 0.93rem;">HTML·CSS·JS 기초를 배우고 실전 UI를 만들어보고 싶은 분</li>
+                    <li style="color: var(--subtext); line-height: 2; font-size: 0.93rem;">jQuery를 활용한 인터랙션 구현을 학습하고 싶은 분</li>
+                    <li style="color: var(--subtext); line-height: 2; font-size: 0.93rem;">UI/UX 설계 원칙을 코드와 함께 이해하고 싶은 분</li>
+                    <li style="color: var(--subtext); line-height: 2; font-size: 0.93rem;">포트폴리오용 UI 컴포넌트 레퍼런스가 필요한 분</li>
+                    <li style="color: var(--subtext); line-height: 2; font-size: 0.93rem;">웹 접근성을 고려한 컴포넌트 구현 방법을 배우고 싶은 분</li>
+                </ul>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-section">
+                <h2>지금 바로 시작하세요</h2>
+                <p class="about-section-lead">
+                    왼쪽 메뉴에서 원하는 UI 컴포넌트를 선택하거나, 궁금한 점은 문의하기를 통해 남겨주세요.
+                </p>
+                <div class="about-cta-wrap">
+                    <a href="./index.html" class="primary">학습 시작하기</a>
+                    <a href="./contact.html" class="secondary">문의하기</a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/common.js"></script>
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "58122cddb29228";
+if(window.wcs) {
+    wcs_do();
+}
+</script>
+</body>
+</html>

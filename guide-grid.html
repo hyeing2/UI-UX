@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid 레이아웃 마스터 - HTML/CSS 기초 가이드 | in.me.kr</title>
+    <meta name="description" content="CSS Grid의 모든 속성을 실시간으로 조작하며 배우는 인터랙티브 플레이그라운드입니다. grid-template-columns, grid-gap, grid-area 등을 직접 바꿔보세요.">
+    <link rel="stylesheet" href="./asstes/css/common.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6170369281719749" crossorigin="anonymous"></script>
+    <style>
+        .grid-preview {
+            display: grid;
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 16px;
+            min-height: 200px;
+            transition: all 0.3s ease;
+            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-item {
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #fff;
+            min-height: 60px;
+            transition: all 0.3s;
+        }
+        .grid-item:nth-child(1)  { background: #2b5cff; }
+        .grid-item:nth-child(2)  { background: #7c3aed; }
+        .grid-item:nth-child(3)  { background: #059669; }
+        .grid-item:nth-child(4)  { background: #d97706; }
+        .grid-item:nth-child(5)  { background: #dc2626; }
+        .grid-item:nth-child(6)  { background: #0891b2; }
+
+        .ctrl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .ctrl-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px;
+            background: #fff;
+        }
+        .ctrl-card label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .ctrl-card select,
+        .ctrl-card input[type="text"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            background: #fff;
+            color: var(--text);
+        }
+        .ctrl-card select:focus,
+        .ctrl-card input:focus { outline: none; border-color: var(--point); }
+
+        .code-out {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 20px 24px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+        }
+        .kw  { color: #93c5fd; }
+        .prop { color: #86efac; }
+        .val  { color: #fde68a; }
+
+        .copy-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .copy-bar span { font-size: 0.8rem; color: var(--subtext); }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--text);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .copy-btn:hover { background: var(--point); color: #fff; border-color: var(--point); }
+        .copy-btn.copied { background: #059669; color: #fff; border-color: #059669; }
+
+        .cheat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+        .cheat-card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .cheat-card .cc-head {
+            background: #f5f7fb;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+            border-bottom: 1px solid var(--line);
+            font-family: 'Fira Code', monospace;
+        }
+        .cheat-card .cc-body {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .cheat-card .cc-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+        }
+        .cheat-card .cc-row .v { font-family: 'Fira Code', monospace; color: var(--point); font-weight: 600; }
+        .cheat-card .cc-row .d { color: var(--subtext); }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+        }
+        .template-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .template-card:hover {
+            border-color: var(--point);
+            box-shadow: 0 4px 16px rgba(43,92,255,0.1);
+        }
+        .template-card .tc-preview {
+            padding: 16px;
+            background: #f8faff;
+            border-bottom: 1px solid var(--line);
+        }
+        .template-card .tc-info {
+            padding: 12px 14px;
+        }
+        .template-card .tc-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0 0 4px;
+        }
+        .template-card .tc-code {
+            font-size: 0.78rem;
+            color: var(--point);
+            font-family: 'Fira Code', monospace;
+        }
+        /* 미니 그리드 미리보기 */
+        .mini-grid {
+            display: grid;
+            gap: 4px;
+            height: 80px;
+        }
+        .mini-cell {
+            background: var(--point);
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+        .mini-cell.accent { background: #7c3aed; opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div id="gnb-root"></div>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+        <main class="content-area">
+
+            <section class="content-section">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                    <a href="./cat-html-css.html" style="font-size:0.82rem; color:var(--subtext); text-decoration:none;">← HTML/CSS 가이드</a>
+                    <span style="color:var(--line)">|</span>
+                    <span style="font-size:0.82rem; color:var(--point); font-weight:600;">03. CSS Grid 마스터</span>
+                </div>
+                <h1>CSS Grid 레이아웃 마스터</h1>
+                <p class="lead-text">
+                    CSS Grid의 핵심 속성을 실시간으로 조작하며 레이아웃이 변하는 것을 확인하세요.
+                    아래 컨트롤 패널에서 값을 바꾸면 미리보기와 코드가 즉시 업데이트됩니다.
+                </p>
+            </section>
+
+            <!-- 인터랙티브 플레이그라운드 -->
+            <section class="content-section">
+                <h2>🎮 실시간 Grid 플레이그라운드</h2>
+
+                <div class="ctrl-grid">
+                    <div class="ctrl-card">
+                        <label>grid-template-columns</label>
+                        <input type="text" id="ctrl-cols" value="repeat(3, 1fr)" placeholder="예: repeat(3, 1fr)">
+                    </div>
+                    <div class="ctrl-card">
+                        <label>grid-template-rows</label>
+                        <input type="text" id="ctrl-rows" value="auto" placeholder="예: 100px auto 100px">
+                    </div>
+                    <div class="ctrl-card">
+                        <label>gap</label>
+                        <select id="ctrl-gap">
+                            <option value="0px">0px</option>
+                            <option value="8px">8px</option>
+                            <option value="10px" selected>10px</option>
+                            <option value="16px">16px</option>
+                            <option value="24px">24px</option>
+                        </select>
+                    </div>
+                    <div class="ctrl-card">
+                        <label>justify-items</label>
+                        <select id="ctrl-justify">
+                            <option value="stretch">stretch</option>
+                            <option value="start">start</option>
+                            <option value="end">end</option>
+                            <option value="center">center</option>
+                        </select>
+                    </div>
+                    <div class="ctrl-card">
+                        <label>align-items</label>
+                        <select id="ctrl-align">
+                            <option value="stretch">stretch</option>
+                            <option value="start">start</option>
+                            <option value="end">end</option>
+                            <option value="center">center</option>
+                        </select>
+                    </div>
+                    <div class="ctrl-card">
+                        <label>아이템 개수</label>
+                        <select id="ctrl-count">
+                            <option value="3">3개</option>
+                            <option value="4">4개</option>
+                            <option value="6" selected>6개</option>
+                            <option value="8">8개</option>
+                            <option value="9">9개</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 미리보기 -->
+                <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:20px;">
+                    <div style="padding:12px 16px; background:#f8faff; border-bottom:1px solid var(--line); font-size:0.8rem; color:var(--subtext); font-weight:600;">
+                        📦 미리보기
+                    </div>
+                    <div style="padding:20px; background:#fff;">
+                        <div class="grid-preview" id="gridPreview"></div>
+                    </div>
+                </div>
+
+                <!-- 코드 출력 -->
+                <div class="copy-bar">
+                    <span>생성된 CSS 코드</span>
+                    <button class="copy-btn" id="copyGridBtn">📋 코드 복사</button>
+                </div>
+                <div class="code-out">
+<span class="kw">.grid-container</span> {<br>
+&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">grid</span>;<br>
+&nbsp;&nbsp;<span class="prop">grid-template-columns</span>: <span class="val" id="out-cols">repeat(3, 1fr)</span>;<br>
+&nbsp;&nbsp;<span class="prop">grid-template-rows</span>: <span class="val" id="out-rows">auto</span>;<br>
+&nbsp;&nbsp;<span class="prop">gap</span>: <span class="val" id="out-gap">10px</span>;<br>
+&nbsp;&nbsp;<span class="prop">justify-items</span>: <span class="val" id="out-justify">stretch</span>;<br>
+&nbsp;&nbsp;<span class="prop">align-items</span>: <span class="val" id="out-align">stretch</span>;<br>
+}
+                </div>
+            </section>
+
+            <!-- 자주 쓰는 템플릿 -->
+            <section class="content-section">
+                <h2>⚡ 클릭으로 적용하는 Grid 템플릿</h2>
+                <p class="lead-text" style="margin-bottom:16px;">자주 쓰는 레이아웃 패턴을 클릭하면 위 플레이그라운드에 바로 적용됩니다.</p>
+                <div class="template-grid">
+
+                    <div class="template-card" data-cols="repeat(3, 1fr)" data-rows="auto" data-gap="16px">
+                        <div class="tc-preview">
+                            <div class="mini-grid" style="grid-template-columns: repeat(3, 1fr);">
+                                <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell"></div>
+                                <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell"></div>
+                            </div>
+                        </div>
+                        <div class="tc-info">
+                            <p class="tc-title">3열 균등 그리드</p>
+                            <p class="tc-code">repeat(3, 1fr)</p>
+                        </div>
+                    </div>
+
+                    <div class="template-card" data-cols="280px 1fr" data-rows="auto" data-gap="0px">
+                        <div class="tc-preview">
+                            <div class="mini-grid" style="grid-template-columns: 60px 1fr;">
+                                <div class="mini-cell accent" style="grid-row: span 2;"></div>
+                                <div class="mini-cell"></div>
+                                <div class="mini-cell"></div>
+                            </div>
+                        </div>
+                        <div class="tc-info">
+                            <p class="tc-title">사이드바 레이아웃</p>
+                            <p class="tc-code">280px 1fr</p>
+                        </div>
+                    </div>
+
+                    <div class="template-card" data-cols="repeat(auto-fill, minmax(240px, 1fr))" data-rows="auto" data-gap="16px">
+                        <div class="tc-preview">
+                            <div class="mini-grid" style="grid-template-columns: repeat(3, 1fr);">
+                                <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell"></div>
+                            </div>
+                        </div>
+                        <div class="tc-info">
+                            <p class="tc-title">반응형 카드 그리드</p>
+                            <p class="tc-code">repeat(auto-fill, minmax(240px, 1fr))</p>
+                        </div>
+                    </div>
+
+                    <div class="template-card" data-cols="1fr 2fr 1fr" data-rows="auto" data-gap="16px">
+                        <div class="tc-preview">
+                            <div class="mini-grid" style="grid-template-columns: 1fr 2fr 1fr;">
+                                <div class="mini-cell"></div><div class="mini-cell accent"></div><div class="mini-cell"></div>
+                            </div>
+                        </div>
+                        <div class="tc-info">
+                            <p class="tc-title">콘텐츠 중심 레이아웃</p>
+                            <p class="tc-code">1fr 2fr 1fr</p>
+                        </div>
+                    </div>
+
+                    <div class="template-card" data-cols="repeat(2, 1fr)" data-rows="auto" data-gap="16px">
+                        <div class="tc-preview">
+                            <div class="mini-grid" style="grid-template-columns: repeat(2, 1fr);">
+                                <div class="mini-cell"></div><div class="mini-cell"></div>
+                                <div class="mini-cell"></div><div class="mini-cell"></div>
+                            </div>
+                        </div>
+                        <div class="tc-info">
+                            <p class="tc-title">2열 그리드</p>
+                            <p class="tc-code">repeat(2, 1fr)</p>
+                        </div>
+                    </div>
+
+                    <div class="template-card" data-cols="repeat(4, 1fr)" data-rows="auto" data-gap="12px">
+                        <div class="tc-preview">
+                            <div class="mini-grid" style="grid-template-columns: repeat(4, 1fr);">
+                                <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell"></div>
+                            </div>
+                        </div>
+                        <div class="tc-info">
+                            <p class="tc-title">4열 그리드</p>
+                            <p class="tc-code">repeat(4, 1fr)</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 치트시트 -->
+            <section class="content-section">
+                <h2>📋 CSS Grid 속성 치트시트</h2>
+                <div class="cheat-grid">
+
+                    <div class="cheat-card">
+                        <div class="cc-head">컨테이너 속성</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="v">display: grid</span><span class="d">그리드 활성화</span></div>
+                            <div class="cc-row"><span class="v">grid-template-columns</span><span class="d">열 정의</span></div>
+                            <div class="cc-row"><span class="v">grid-template-rows</span><span class="d">행 정의</span></div>
+                            <div class="cc-row"><span class="v">gap</span><span class="d">행/열 간격</span></div>
+                            <div class="cc-row"><span class="v">grid-template-areas</span><span class="d">영역 이름 지정</span></div>
+                            <div class="cc-row"><span class="v">grid-auto-flow</span><span class="d">자동 배치 방향</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">아이템 속성</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="v">grid-column</span><span class="d">열 위치/범위</span></div>
+                            <div class="cc-row"><span class="v">grid-row</span><span class="d">행 위치/범위</span></div>
+                            <div class="cc-row"><span class="v">grid-area</span><span class="d">영역 이름 할당</span></div>
+                            <div class="cc-row"><span class="v">justify-self</span><span class="d">개별 수평 정렬</span></div>
+                            <div class="cc-row"><span class="v">align-self</span><span class="d">개별 수직 정렬</span></div>
+                            <div class="cc-row"><span class="v">span 키워드</span><span class="d">여러 셀 차지</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">유용한 함수</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="v">repeat(n, size)</span><span class="d">n번 반복</span></div>
+                            <div class="cc-row"><span class="v">minmax(min, max)</span><span class="d">최소~최대 크기</span></div>
+                            <div class="cc-row"><span class="v">auto-fill</span><span class="d">가능한 많이 채움</span></div>
+                            <div class="cc-row"><span class="v">auto-fit</span><span class="d">남은 공간 늘림</span></div>
+                            <div class="cc-row"><span class="v">fr 단위</span><span class="d">비율로 크기 지정</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Flexbox vs Grid 비교 -->
+            <section class="content-section">
+                <h2>⚖️ Flexbox vs Grid — 언제 무엇을 쓸까?</h2>
+                <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+                    <thead>
+                        <tr>
+                            <th style="border:1px solid var(--line); padding:11px 14px; background:#f5f7fb; text-align:left;">구분</th>
+                            <th style="border:1px solid var(--line); padding:11px 14px; background:#eef2ff; text-align:left; color:var(--cat1);">Flexbox</th>
+                            <th style="border:1px solid var(--line); padding:11px 14px; background:#f5f3ff; text-align:left; color:var(--cat2);">Grid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border:1px solid var(--line); padding:11px 14px; font-weight:600;">방향</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">1차원 (행 또는 열)</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">2차원 (행 + 열 동시)</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid var(--line); padding:11px 14px; font-weight:600;">적합한 상황</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">내비게이션, 버튼 그룹, 카드 한 줄</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">전체 페이지 레이아웃, 복잡한 그리드</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid var(--line); padding:11px 14px; font-weight:600;">콘텐츠 기반</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">콘텐츠 크기에 따라 유연하게</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">레이아웃 구조를 먼저 정의</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid var(--line); padding:11px 14px; font-weight:600;">브라우저 지원</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">매우 넓음 (IE11 포함)</td>
+                            <td style="border:1px solid var(--line); padding:11px 14px; color:var(--subtext);">넓음 (IE11 부분 지원)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/gnb.js"></script>
+    <script src="./asstes/js/common.js"></script>
+    <script>
+    $(function () {
+        var colors = ['#2b5cff','#7c3aed','#059669','#d97706','#dc2626','#0891b2','#be185d','#0f766e','#b45309'];
+
+        function renderItems(count) {
+            var html = '';
+            for (var i = 0; i < count; i++) {
+                html += '<div class="grid-item" style="background:' + colors[i % colors.length] + '">' + (i + 1) + '</div>';
+            }
+            $('#gridPreview').html(html);
+        }
+
+        function updateGrid() {
+            var cols    = $('#ctrl-cols').val() || 'repeat(3, 1fr)';
+            var rows    = $('#ctrl-rows').val() || 'auto';
+            var gap     = $('#ctrl-gap').val();
+            var justify = $('#ctrl-justify').val();
+            var align   = $('#ctrl-align').val();
+            var count   = parseInt($('#ctrl-count').val());
+
+            $('#gridPreview').css({
+                'grid-template-columns': cols,
+                'grid-template-rows':    rows,
+                'gap':                   gap,
+                'justify-items':         justify,
+                'align-items':           align
+            });
+
+            renderItems(count);
+
+            $('#out-cols').text(cols);
+            $('#out-rows').text(rows);
+            $('#out-gap').text(gap);
+            $('#out-justify').text(justify);
+            $('#out-align').text(align);
+        }
+
+        $('select[id^="ctrl-"], input[id^="ctrl-"]').on('change input', updateGrid);
+
+        // 템플릿 클릭
+        $('.template-card').on('click', function () {
+            var cols = $(this).data('cols');
+            var rows = $(this).data('rows');
+            var gap  = $(this).data('gap');
+            $('#ctrl-cols').val(cols);
+            $('#ctrl-rows').val(rows);
+            // gap select에서 가장 가까운 값 선택
+            $('#ctrl-gap option').each(function () {
+                if ($(this).val() === gap) $(this).prop('selected', true);
+            });
+            updateGrid();
+        });
+
+        // 코드 복사
+        $('#copyGridBtn').on('click', function () {
+            var code = '.grid-container {\n' +
+                '  display: grid;\n' +
+                '  grid-template-columns: ' + $('#ctrl-cols').val() + ';\n' +
+                '  grid-template-rows: ' + $('#ctrl-rows').val() + ';\n' +
+                '  gap: ' + $('#ctrl-gap').val() + ';\n' +
+                '  justify-items: ' + $('#ctrl-justify').val() + ';\n' +
+                '  align-items: ' + $('#ctrl-align').val() + ';\n' +
+                '}';
+            navigator.clipboard.writeText(code).then(function () {
+                $('#copyGridBtn').text('✅ 복사됨!').addClass('copied');
+                setTimeout(function () { $('#copyGridBtn').text('📋 코드 복사').removeClass('copied'); }, 2000);
+            });
+        });
+
+        // 초기 렌더링
+        renderItems(6);
+    });
+    </script>
+    <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+    <script type="text/javascript">if(!wcs_add) var wcs_add = {};wcs_add["wa"] = "58122cddb29228";if(window.wcs) { wcs_do(); }</script>
+</body>
+</html>

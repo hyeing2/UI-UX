@@ -78,6 +78,7 @@
             '</div>' +
             '<nav class="footer-nav" aria-label="푸터 내비게이션">' +
             '<a href="./index.html">홈</a>' +
+            '<a href="./about.html">소개</a>' +
             '<a href="./contact.html">문의하기</a>' +
             '<a href="./privacy.html">개인정보처리방침</a>' +
             '<a href="./terms.html">이용약관</a>' +

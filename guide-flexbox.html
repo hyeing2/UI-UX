@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox 플레이그라운드 - HTML/CSS 기초 가이드 | in.me.kr</title>
+    <meta name="description" content="CSS Flexbox의 모든 속성을 실시간으로 조작하며 배우는 인터랙티브 플레이그라운드입니다. justify-content, align-items, flex-wrap 등을 직접 바꿔보세요.">
+    <link rel="stylesheet" href="./asstes/css/common.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6170369281719749" crossorigin="anonymous"></script>
+    <style>
+        .flex-demo-container {
+            display: flex;
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 180px;
+            gap: 10px;
+            transition: all 0.3s ease;
+            flex-wrap: wrap;
+        }
+        .flex-demo-item {
+            background: var(--point);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .flex-demo-item:nth-child(1) { background: #2b5cff; width: 60px; height: 60px; }
+        .flex-demo-item:nth-child(2) { background: #7c3aed; width: 80px; height: 80px; }
+        .flex-demo-item:nth-child(3) { background: #059669; width: 50px; height: 50px; }
+        .flex-demo-item:nth-child(4) { background: #d97706; width: 70px; height: 70px; }
+        .flex-demo-item:nth-child(5) { background: #dc2626; width: 55px; height: 55px; }
+
+        .prop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .prop-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px;
+            background: #fff;
+        }
+        .prop-card h3 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 10px;
+        }
+        .prop-card select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            background: #fff;
+            color: var(--text);
+            cursor: pointer;
+        }
+        .prop-card select:focus { outline: none; border-color: var(--point); }
+
+        .code-output {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 20px 24px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+            position: relative;
+        }
+        .code-output .kw  { color: #93c5fd; }
+        .code-output .prop { color: #86efac; }
+        .code-output .val  { color: #fde68a; }
+
+        .copy-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .copy-bar span { font-size: 0.8rem; color: var(--subtext); }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+        .cheat-card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .cheat-card .cc-head {
+            background: #f5f7fb;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+            border-bottom: 1px solid var(--line);
+            font-family: 'Fira Code', monospace;
+        }
+        .cheat-card .cc-body {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .cheat-card .cc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+        }
+        .cheat-card .cc-row .val {
+            font-family: 'Fira Code', monospace;
+            color: var(--point);
+            font-weight: 600;
+        }
+        .cheat-card .cc-row .desc {
+            color: var(--subtext);
+        }
+    </style>
+</head>
+<body>
+    <div id="gnb-root"></div>
+    <div class="app-layout">
+        <aside id="sidebar-root"></aside>
+        <main class="content-area">
+
+            <!-- 헤더 -->
+            <section class="content-section">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                    <a href="./cat-html-css.html" style="font-size:0.82rem; color:var(--subtext); text-decoration:none;">← HTML/CSS 가이드</a>
+                    <span style="color:var(--line)">|</span>
+                    <span style="font-size:0.82rem; color:var(--point); font-weight:600;">01. Flexbox 플레이그라운드</span>
+                </div>
+                <h1>CSS Flexbox 플레이그라운드</h1>
+                <p class="lead-text">
+                    아래 컨트롤 패널에서 Flexbox 속성을 바꾸면 미리보기가 실시간으로 업데이트됩니다.
+                    생성된 CSS 코드를 바로 복사해서 프로젝트에 적용해보세요.
+                </p>
+            </section>
+
+            <!-- 인터랙티브 플레이그라운드 -->
+            <section class="content-section">
+                <h2>🎮 실시간 플레이그라운드</h2>
+
+                <!-- 컨트롤 패널 -->
+                <div class="prop-grid" style="margin-bottom:20px;">
+                    <div class="prop-card">
+                        <h3>flex-direction</h3>
+                        <select id="ctrl-direction">
+                            <option value="row">row</option>
+                            <option value="row-reverse">row-reverse</option>
+                            <option value="column">column</option>
+                            <option value="column-reverse">column-reverse</option>
+                        </select>
+                    </div>
+                    <div class="prop-card">
+                        <h3>justify-content</h3>
+                        <select id="ctrl-justify">
+                            <option value="flex-start">flex-start</option>
+                            <option value="flex-end">flex-end</option>
+                            <option value="center">center</option>
+                            <option value="space-between">space-between</option>
+                            <option value="space-around">space-around</option>
+                            <option value="space-evenly">space-evenly</option>
+                        </select>
+                    </div>
+                    <div class="prop-card">
+                        <h3>align-items</h3>
+                        <select id="ctrl-align">
+                            <option value="stretch">stretch</option>
+                            <option value="flex-start">flex-start</option>
+                            <option value="flex-end">flex-end</option>
+                            <option value="center">center</option>
+                            <option value="baseline">baseline</option>
+                        </select>
+                    </div>
+                    <div class="prop-card">
+                        <h3>flex-wrap</h3>
+                        <select id="ctrl-wrap">
+                            <option value="nowrap">nowrap</option>
+                            <option value="wrap">wrap</option>
+                            <option value="wrap-reverse">wrap-reverse</option>
+                        </select>
+                    </div>
+                    <div class="prop-card">
+                        <h3>align-content</h3>
+                        <select id="ctrl-align-content">
+                            <option value="normal">normal</option>
+                            <option value="flex-start">flex-start</option>
+                            <option value="flex-end">flex-end</option>
+                            <option value="center">center</option>
+                            <option value="space-between">space-between</option>
+                            <option value="space-around">space-around</option>
+                        </select>
+                    </div>
+                    <div class="prop-card">
+                        <h3>gap</h3>
+                        <select id="ctrl-gap">
+                            <option value="0px">0px</option>
+                            <option value="8px">8px</option>
+                            <option value="16px" selected>16px</option>
+                            <option value="24px">24px</option>
+                            <option value="32px">32px</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 미리보기 -->
+                <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:20px;">
+                    <div style="padding:12px 16px; background:#f8faff; border-bottom:1px solid var(--line); font-size:0.8rem; color:var(--subtext); font-weight:600;">
+                        📦 미리보기 (컨테이너 높이: 200px)
+                    </div>
+                    <div style="padding:20px; background:#fff; min-height:200px;">
+                        <div class="flex-demo-container" id="flexPreview" style="height:200px;">
+                            <div class="flex-demo-item">1</div>
+                            <div class="flex-demo-item">2</div>
+                            <div class="flex-demo-item">3</div>
+                            <div class="flex-demo-item">4</div>
+                            <div class="flex-demo-item">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 생성된 코드 -->
+                <div class="copy-bar">
+                    <span>생성된 CSS 코드</span>
+                    <button class="copy-btn" id="copyFlexBtn">📋 코드 복사</button>
+                </div>
+                <div class="code-output" id="flexCodeOutput">
+                    <span class="kw">.container</span> {<br>
+                    &nbsp;&nbsp;<span class="prop">display</span>: <span class="val">flex</span>;<br>
+                    &nbsp;&nbsp;<span class="prop">flex-direction</span>: <span class="val" id="out-direction">row</span>;<br>
+                    &nbsp;&nbsp;<span class="prop">justify-content</span>: <span class="val" id="out-justify">flex-start</span>;<br>
+                    &nbsp;&nbsp;<span class="prop">align-items</span>: <span class="val" id="out-align">stretch</span>;<br>
+                    &nbsp;&nbsp;<span class="prop">flex-wrap</span>: <span class="val" id="out-wrap">nowrap</span>;<br>
+                    &nbsp;&nbsp;<span class="prop">align-content</span>: <span class="val" id="out-align-content">normal</span>;<br>
+                    &nbsp;&nbsp;<span class="prop">gap</span>: <span class="val" id="out-gap">16px</span>;<br>
+                    }
+                </div>
+            </section>
+
+            <!-- 치트시트 -->
+            <section class="content-section">
+                <h2>📋 Flexbox 속성 치트시트</h2>
+                <div class="cheatsheet-grid">
+
+                    <div class="cheat-card">
+                        <div class="cc-head">justify-content (주축 정렬)</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="val">flex-start</span><span class="desc">왼쪽 정렬</span></div>
+                            <div class="cc-row"><span class="val">flex-end</span><span class="desc">오른쪽 정렬</span></div>
+                            <div class="cc-row"><span class="val">center</span><span class="desc">가운데 정렬</span></div>
+                            <div class="cc-row"><span class="val">space-between</span><span class="desc">양끝 정렬, 균등 간격</span></div>
+                            <div class="cc-row"><span class="val">space-around</span><span class="desc">각 아이템 주변 균등</span></div>
+                            <div class="cc-row"><span class="val">space-evenly</span><span class="desc">모든 간격 완전 균등</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">align-items (교차축 정렬)</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="val">stretch</span><span class="desc">컨테이너 높이에 맞춤</span></div>
+                            <div class="cc-row"><span class="val">flex-start</span><span class="desc">위쪽 정렬</span></div>
+                            <div class="cc-row"><span class="val">flex-end</span><span class="desc">아래쪽 정렬</span></div>
+                            <div class="cc-row"><span class="val">center</span><span class="desc">수직 가운데 정렬</span></div>
+                            <div class="cc-row"><span class="val">baseline</span><span class="desc">텍스트 기준선 정렬</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">flex-direction (방향)</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="val">row</span><span class="desc">가로 방향 (기본값)</span></div>
+                            <div class="cc-row"><span class="val">row-reverse</span><span class="desc">가로 역방향</span></div>
+                            <div class="cc-row"><span class="val">column</span><span class="desc">세로 방향</span></div>
+                            <div class="cc-row"><span class="val">column-reverse</span><span class="desc">세로 역방향</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">flex-wrap (줄바꿈)</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="val">nowrap</span><span class="desc">한 줄 유지 (기본값)</span></div>
+                            <div class="cc-row"><span class="val">wrap</span><span class="desc">넘치면 다음 줄로</span></div>
+                            <div class="cc-row"><span class="val">wrap-reverse</span><span class="desc">역방향으로 줄바꿈</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">flex 아이템 속성</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="val">flex-grow</span><span class="desc">남은 공간 차지 비율</span></div>
+                            <div class="cc-row"><span class="val">flex-shrink</span><span class="desc">공간 부족 시 줄어드는 비율</span></div>
+                            <div class="cc-row"><span class="val">flex-basis</span><span class="desc">기본 크기 설정</span></div>
+                            <div class="cc-row"><span class="val">flex: 1</span><span class="desc">1 1 0% 단축 표기</span></div>
+                            <div class="cc-row"><span class="val">align-self</span><span class="desc">개별 아이템 교차축 정렬</span></div>
+                            <div class="cc-row"><span class="val">order</span><span class="desc">아이템 순서 변경</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cheat-card">
+                        <div class="cc-head">자주 쓰는 패턴</div>
+                        <div class="cc-body">
+                            <div class="cc-row"><span class="val">완전 가운데</span><span class="desc">justify+align: center</span></div>
+                            <div class="cc-row"><span class="val">내비게이션</span><span class="desc">space-between + center</span></div>
+                            <div class="cc-row"><span class="val">카드 그리드</span><span class="desc">wrap + gap</span></div>
+                            <div class="cc-row"><span class="val">사이드바</span><span class="desc">column + flex-grow:1</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 실전 예제 코드 -->
+            <section class="content-section">
+                <h2>💡 자주 쓰는 Flexbox 패턴 코드</h2>
+
+                <h3 style="font-size:0.95rem; margin:0 0 10px; color:var(--text);">① 완전 가운데 정렬</h3>
+                <div class="code-output" style="margin-bottom:20px;">
+<span class="kw">.center-box</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">min-height</span>: <span class="val">100vh</span>;
+}</div>
+
+                <h3 style="font-size:0.95rem; margin:0 0 10px; color:var(--text);">② 내비게이션 바 (로고 + 메뉴)</h3>
+                <div class="code-output" style="margin-bottom:20px;">
+<span class="kw">.navbar</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">padding</span>: <span class="val">0 24px</span>;
+  <span class="prop">height</span>: <span class="val">60px</span>;
+}</div>
+
+                <h3 style="font-size:0.95rem; margin:0 0 10px; color:var(--text);">③ 반응형 카드 그리드</h3>
+                <div class="code-output">
+<span class="kw">.card-grid</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+  <span class="prop">gap</span>: <span class="val">20px</span>;
+}
+<span class="kw">.card-grid .card</span> {
+  <span class="prop">flex</span>: <span class="val">1 1 280px</span>; <span style="color:#64748b">/* 최소 280px, 남은 공간 균등 분배 */</span>
+}</div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./asstes/js/menu.js"></script>
+    <script src="./asstes/js/gnb.js"></script>
+    <script src="./asstes/js/common.js"></script>
+    <script>
+    $(function () {
+        function updateFlex() {
+            var direction     = $('#ctrl-direction').val();
+            var justify       = $('#ctrl-justify').val();
+            var align         = $('#ctrl-align').val();
+            var wrap          = $('#ctrl-wrap').val();
+            var alignContent  = $('#ctrl-align-content').val();
+            var gap           = $('#ctrl-gap').val();
+
+            // 미리보기 업데이트
+            $('#flexPreview').css({
+                'flex-direction':  direction,
+                'justify-content': justify,
+                'align-items':     align,
+                'flex-wrap':       wrap,
+                'align-content':   alignContent,
+                'gap':             gap
+            });
+
+            // 코드 출력 업데이트
+            $('#out-direction').text(direction);
+            $('#out-justify').text(justify);
+            $('#out-align').text(align);
+            $('#out-wrap').text(wrap);
+            $('#out-align-content').text(alignContent);
+            $('#out-gap').text(gap);
+        }
+
+        // 모든 select 변경 시 업데이트
+        $('select[id^="ctrl-"]').on('change', updateFlex);
+
+        // 코드 복사
+        $('#copyFlexBtn').on('click', function () {
+            var direction    = $('#ctrl-direction').val();
+            var justify      = $('#ctrl-justify').val();
+            var align        = $('#ctrl-align').val();
+            var wrap         = $('#ctrl-wrap').val();
+            var alignContent = $('#ctrl-align-content').val();
+            var gap          = $('#ctrl-gap').val();
+
+            var code = '.container {\n' +
+                '  display: flex;\n' +
+                '  flex-direction: ' + direction + ';\n' +
+                '  justify-content: ' + justify + ';\n' +
+                '  align-items: ' + align + ';\n' +
+                '  flex-wrap: ' + wrap + ';\n' +
+                '  align-content: ' + alignContent + ';\n' +
+                '  gap: ' + gap + ';\n' +
+                '}';
+
+            navigator.clipboard.writeText(code).then(function () {
+                var $btn = $('#copyFlexBtn');
+                $btn.text('✅ 복사됨!').addClass('copied');
+                setTimeout(function () {
+                    $btn.text('📋 코드 복사').removeClass('copied');
+                }, 2000);
+            });
+        });
+    });
+    </script>
+    <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+    <script type="text/javascript">if(!wcs_add) var wcs_add = {};wcs_add["wa"] = "58122cddb29228";if(window.wcs) { wcs_do(); }</script>
+</body>
+</html>
