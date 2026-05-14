@@ -24,7 +24,8 @@
         { title: "로딩 스피너", href: "./spinner.html", desc: "로딩 상태 표시 UI" },
         { title: "토글", href: "./toggle.html", desc: "켜기/끄기 스위치 UI" },
         { title: "프로그레스바", href: "./progress-bar.html", desc: "진행 상황 표시 UI" },
-        { title: "문의하기", href: "./contact.html", desc: "서비스 문의 및 피드백" }
+        { title: "문의하기", href: "./contact.html", desc: "서비스 문의 및 피드백" },
+        { title: "사이트 소개", href: "./about.html", desc: "UI/UX Study 소개 페이지" }
     ];
 
     function buildSidebar() {
